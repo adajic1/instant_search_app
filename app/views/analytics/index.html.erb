@@ -1,0 +1,22 @@
+<h1>Analytics</h1>
+
+<% if @analytics.count>0 %>
+	<div id="analyticsContent">
+		<input type="button" value="Click to clear all analytics records" id="clearAnalyticsTable" class="button_red"><br>
+		<br>
+		<table cellpadding=5 border=1 class="styled_table">
+			<tr>
+				<th><b>Phrase</b></th>
+				<th width="1px"><b>Counter</b></th>
+			</tr>
+			<% @analytics.each do |data| %>
+			<tr>
+			    <td><%= data.phrase %></td>
+			    <td><%= data.counter %></td>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+<% else %>
+	No data to show.
+<% end %>

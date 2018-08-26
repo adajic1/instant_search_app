@@ -1,0 +1,59 @@
+// Place all the styles related to the Analytics controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.button_red {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px 9px;
+    border: 1px solid #b82b10;
+    border-radius: 8px;
+    background: #ff501e;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff501e), to(#b82b10));
+    background: -moz-linear-gradient(top, #ff501e, #b82b10);
+    background: linear-gradient(to bottom, #ff501e, #b82b10);
+    text-shadow: #6d190a 1px 1px 1px;
+    font: normal normal bold 14px arial;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+.button_red:hover,
+.button_red:focus {
+    border: 1px solid #d93213;
+    background: #ff6024;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff6024), to(#dd3413));
+    background: -moz-linear-gradient(top, #ff6024, #dd3413);
+    background: linear-gradient(to bottom, #ff6024, #dd3413);
+    color: #ffffff;
+    text-decoration: none;
+}
+.button_red:active {
+    background: #b82b10;
+    background: -webkit-gradient(linear, left top, left bottom, from(#b82b10), to(#b82b10));
+    background: -moz-linear-gradient(top, #b82b10, #b82b10);
+    background: linear-gradient(to bottom, #b82b10, #b82b10);
+}
+
+.styled_table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    min-width: 350px;
+}
+
+.styled_table td, .styled_table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.styled_table tr:nth-child(even){background-color: #f2f2f2;}
+
+.styled_table tr:hover {background-color: #ddd;}
+
+.styled_table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
