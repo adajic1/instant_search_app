@@ -29,7 +29,7 @@ class Analytic < ApplicationRecord
     if !analytic_row.nil? # string already exists in the database    
       update_or_destroy_existing_counter(analytic_row, number)    
     elsif number > 0 # string is new, so the record should be created now            
-      create_new_counter(string, number)
+      create(counter: number, phrase: string)
     end    
   end  
   
@@ -40,14 +40,6 @@ class Analytic < ApplicationRecord
   def self.update_or_destroy_existing_counter(analytic_row, number)
     analytic_row.update_attribute(:counter, analytic_row.counter+number)
     analytic_row.destroy if analytic_row.counter <= 0
-  end
-  
-  # Creates new counter for given string.
-  # * *Args*    :
-  #   - +string+ -> phrase for new record
-  #   - +number+ -> counter for new record. It should be > 0
-  def self.create_new_counter(string, number)
-    Analytic.create(counter: number, phrase: string)
   end
   
 end

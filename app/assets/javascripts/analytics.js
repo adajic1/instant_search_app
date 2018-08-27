@@ -10,9 +10,31 @@ $(document).ready(function() {
           $('#analyticsContent').html(result);
         },
         error: function(result) {
-          $('#analyticsContent').html("<b>Response:</b> "+result);
+          $('#analyticsContent').html("<b>Error:</b> "+result);
         }
     });  
   });
   
+  $(document).on('click', '[id^="destroy_"]', function() {
+  	// id attribute is expected to be of the following format: destroy_xx
+    var words = $(this).attr("id").split("_");
+    var id = words[words.length - 1];
+    $('#row_'+id).remove();
+    if ($('[id^="destroy_"]').length==0) 
+    	$('#analyticsContent').html("All data cleared...");
+
+    $.ajax({
+        method: 'DELETE',
+        url: "destroy_record",   
+        data: { authenticity_token: $('[name="csrf-token"]')[0].content, id: id},     
+        async: true,
+        success: function(result) {
+          // alert(result);
+        },
+        error: function(result) {
+          $('#analyticsContent').html("<b>Error:</b> "+result);
+        }
+    });  
+
+  });
 });

@@ -4,47 +4,49 @@ class LevensteinService
   # * *Args*    :
   #   - +target+ -> target string for Levenstein distance calculation
   #   - +source+ -> source string for Levenstein distance calculation
-  #   - +ins+ -> cost value of char insertion
-  #   - +del+ -> cost value of char deletion
-  #   - +sub+ -> cost value of char substitution
+  #   - +insertion_cost+ -> cost value of char insertion
+  #   - +deletion_cost+ -> cost value of char deletion
+  #   - +substitution_cost+ -> cost value of char substitution
   # * *Returns* :
-  #   - Levenstein distance in form of array 1x3: [insertions, deletions, substitutions]. 
+  #   - Levenstein distance in form of an array 1x3: 
+  #   - [number_of_insertions, number_of_deletions, number_of_substitutions] 
   #   - You can sum those 3 values to get total Levenstein distance.
-  def self.call(target, source, ins=1, del=1, sub=1)
-    # ins, del, sub are weighted costs
-    new(target, source, ins, del, sub).call
+  def self.call(target, source, insertion_cost=1, deletion_cost=1, substitution_cost=1)
+    new(target, source, insertion_cost, deletion_cost, substitution_cost).call
   end
   
   # Calculate Levenstein distance between strings with weighted costs.
   # Separately store deletions, insertions and substitutions.
   # * *Returns* :
-  #   - Levenstein distance in form of array 1x3: [insertions, deletions, substitutions]. 
+  #   - Levenstein distance in form of an array 1x3: 
+  #   - [number_of_insertions, number_of_deletions, number_of_substitutions] 
   #   - You can sum those 3 values to get total Levenstein distance.
   def call
     return nil if (@target.nil? || @source.nil?)
     
-    t_len = @target.length
-    s_len = @source.length
-    dm = Array.new(s_len+1) { Array.new(t_len+1) {[0, 0, 0]}} # distance matrix, dimension (s_len+1)x(t_len+1)x(3)
+    target_length = @target.length
+    source_length = @source.length
+    dm = Array.new(source_length+1) { Array.new(target_length+1) {[0, 0, 0]}} 
+    # distance matrix, dimension (source_length+1)x(target_length+1)x(3)
     
     # initialize first row   
-    for j in 1..t_len
-      dm[0][j][0] = j * @ins
+    for j in 1..target_length
+      dm[0][j][0] = j * @insertion_cost
     end
     
     # initialize first column
-    for i in 1..s_len
-      dm[i][0][1] = i * @del
+    for i in 1..source_length
+      dm[i][0][1] = i * @deletion_cost
     end 
     
     # populate matrix
-    for i in 1..s_len
-      for j in 1..t_len
+    for i in 1..source_length
+      for j in 1..target_length
         # critical comparison
-        subCost = (@target[j-1] == @source[i-1] ? 0 : @sub)
+        subCost = (@target[j-1] == @source[i-1] ? 0 : @substitution_cost)
         x1 = dm[i-1][j-1].sum + subCost
-        x2 = dm[i][j-1].sum + @ins
-        x3 = dm[i-1][j].sum + @del
+        x2 = dm[i][j-1].sum + @insertion_cost
+        x3 = dm[i-1][j].sum + @deletion_cost
         if x1<=x2 && x1<=x3
           # substitution
           dm[i][j] = dm[i-1][j-1].clone
@@ -52,29 +54,29 @@ class LevensteinService
         elsif x2<=x1 && x2<=x3
           # insertion
           dm[i][j] = dm[i][j-1].clone
-          dm[i][j][0] += @ins
+          dm[i][j][0] += @insertion_cost
         else
           # deletion
           dm[i][j] = dm[i-1][j].clone
-          dm[i][j][1] += @del
+          dm[i][j][1] += @deletion_cost
         end
       end
     end
 
     # the last value in matrix is the Levenshtein distance between the strings
-    dm[s_len][t_len]
+    dm[source_length][target_length]
     # prettyPrintMatrix(dm)
   end
   
   private
   
   # Initialize instance variables: @target, @source, @ins, @del, @sub
-  def initialize(target, source, ins=1, del=1, sub=1)
+  def initialize(target, source, insertion_cost=1, deletion_cost=1, substitution_cost=1)
     @target = target # target string
     @source = source # source string
-    @ins = ins # weighted cost of insertion
-    @del = del # weighted cost of deletion
-    @sub = sub # weighted cost of substitution
+    @insertion_cost = insertion_cost # weighted cost of insertion
+    @deletion_cost = deletion_cost # weighted cost of deletion
+    @substitution_cost = substitution_cost # weighted cost of substitution
   end
   
   # Pretty print matrix

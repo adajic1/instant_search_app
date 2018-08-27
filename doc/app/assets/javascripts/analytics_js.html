@@ -107,6 +107,8 @@
   
     <li><a href="../../../public/robots_txt.html">robots</a>
   
+    <li><a href="../../../tmp/pids/server_pid.html">server.pid</a>
+  
     <li><a href="../../../tmp/restart_txt.html">restart</a>
   
     <li><a href="../../../vendor/assets/javascripts/jquery-3_3_1_min_js.html">jquery-3.3.1.min.js</a>
@@ -131,9 +133,32 @@
         $(&#39;#analyticsContent&#39;).html(result);
       },
       error: function(result) {
-        $(&#39;#analyticsContent&#39;).html(&quot;&lt;b&gt;Response:&lt;/b&gt; &quot;+result);
+        $(&#39;#analyticsContent&#39;).html(&quot;&lt;b&gt;Error:&lt;/b&gt; &quot;+result);
       }
   });  
+});
+
+$(document).on(&#39;click&#39;, &#39;[id^=&quot;destroy_&quot;]&#39;, function() {
+      // id attribute is expected to be of the following format: destroy_xx
+  var words = $(this).attr(&quot;id&quot;).split(&quot;_&quot;);
+  var id = words[words.length - 1];
+  $(&#39;#row_&#39;+id).remove();
+  if ($(&#39;[id^=&quot;destroy_&quot;]&#39;).length==0) 
+      $(&#39;#analyticsContent&#39;).html(&quot;All data cleared...&quot;);
+
+  $.ajax({
+      method: &#39;DELETE&#39;,
+      url: &quot;destroy_record&quot;,   
+      data: { authenticity_token: $(&#39;[name=&quot;csrf-token&quot;]&#39;)[0].content, id: id},     
+      async: true,
+      success: function(result) {
+        // alert(result);
+      },
+      error: function(result) {
+        $(&#39;#analyticsContent&#39;).html(&quot;&lt;b&gt;Error:&lt;/b&gt; &quot;+result);
+      }
+  });  
+
 });</pre>
 
 <p>});</p>

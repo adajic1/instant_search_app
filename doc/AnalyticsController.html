@@ -73,6 +73,8 @@
     
     <li ><a href="#method-i-destroy">#destroy</a>
     
+    <li ><a href="#method-i-destroy_record">#destroy_record</a>
+    
     <li ><a href="#method-i-index">#index</a>
     
   </ul>
@@ -120,17 +122,51 @@
 
         <div class="method-description">
           
-          
+          <p>Destroys all data from tables</p>
           
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/analytics_controller.rb, line 7</span>
+            <pre><span class="ruby-comment"># File app/controllers/analytics_controller.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">destroy</span>
   <span class="ruby-constant">Session</span>.<span class="ruby-identifier">destroy_all</span>
   <span class="ruby-constant">Analytic</span>.<span class="ruby-identifier">destroy_all</span>
   <span class="ruby-identifier">send_data</span> <span class="ruby-string">&quot;Cleared successfully...&quot;</span> 
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-destroy_record" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">destroy_record</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Destroys particular record</p>
+          
+          
+
+          
+          <div class="method-source-code" id="destroy_record-source">
+            <pre><span class="ruby-comment"># File app/controllers/analytics_controller.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">destroy_record</span>    
+  <span class="ruby-constant">Analytic</span>.<span class="ruby-identifier">destroy</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-identifier">send_data</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>] 
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -164,7 +200,7 @@
             <pre><span class="ruby-comment"># File app/controllers/analytics_controller.rb, line 2</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
   <span class="ruby-ivar">@analytics</span>=<span class="ruby-constant">Analytic</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">counter:</span> <span class="ruby-value">:DESC</span>)
-  <span class="ruby-identifier">render</span> <span class="ruby-value">template:</span> <span class="ruby-string">&quot;analytics/index&quot;</span>
+  <span class="ruby-comment"># render template: &quot;analytics/index&quot; # not needed because ruby renders it by default</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
