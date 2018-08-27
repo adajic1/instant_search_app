@@ -38,8 +38,11 @@ class Analytic < ApplicationRecord
   #   - +analytic_row+ -> data record from database
   #   - +number+ -> integer value by which we update the counter (can be negative)
   def self.update_or_destroy_existing_counter(analytic_row, number)
-    analytic_row.update_attribute(:counter, analytic_row.counter+number)
-    analytic_row.destroy if analytic_row.counter <= 0
+    if analytic_row.counter+number <= 0
+      analytic_row.destroy
+    else
+      analytic_row.update_attribute(:counter, analytic_row.counter+number)
+    end
   end
   
 end
