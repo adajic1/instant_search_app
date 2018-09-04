@@ -1,0 +1,18 @@
+<h1>Articles</h1>
+<%= form_for :article, :url => "", html: {id: :new_article_form } do |f| %>
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </p>
+ 
+  <p>
+    <%= f.label :content %><br>
+    <%= f.text_area :content, size: "70x5" %>
+  </p>
+ 
+  <p>
+    <%= f.submit :id => 'save_article', :type => 'button', :value => "Add new article" %>
+    <input type="button" id="clear_form_button" value="Clear fields">
+  </p>
+<% end %>
+
