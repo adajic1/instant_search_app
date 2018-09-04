@@ -1,12 +1,6 @@
 class LevensteinService
   
   # Just passing values to initialize, then calling .call method
-  # * *Args*    :
-  #   - +target+ -> target string for Levenstein distance calculation
-  #   - +source+ -> source string for Levenstein distance calculation
-  #   - +insertion_cost+ -> cost value of char insertion
-  #   - +deletion_cost+ -> cost value of char deletion
-  #   - +substitution_cost+ -> cost value of char substitution
   # * *Returns* :
   #   - Levenstein distance in form of an array 1x3: 
   #   - [number_of_insertions, number_of_deletions, number_of_substitutions] 
@@ -70,7 +64,7 @@ class LevensteinService
   
   private
   
-  # Initialize instance variables: @target, @source, @ins, @del, @sub
+  # Initialize instance variables
   def initialize(target, source, insertion_cost=1, deletion_cost=1, substitution_cost=1)
     @target = target # target string
     @source = source # source string

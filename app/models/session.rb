@@ -1,9 +1,7 @@
 class Session < ApplicationRecord
   has_many :search_queries, dependent: :destroy
   
-  # Get Session instance with given :body. If it doesn't exist, it will be created.
-  # * *Args*    :
-  #   - +ip_string+ -> IP address which we are looking for
+  # Get Session instance with given :body -> ip_string. If it doesn't exist, it will be created.
   # * *Returns* :
   #   - Session object
   def self.get_or_create(ip_string) 

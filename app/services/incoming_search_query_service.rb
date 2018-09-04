@@ -12,7 +12,7 @@ class IncomingSearchQueryService
     session.update_attribute(:lastpartial, @new_query) 
         
     SearchQuery.create(body: @new_query, session: session) unless @new_query.blank?
-    Analytic.update_for_last_two_queries(@new_query, @old_query)
+    Analytic.compare_and_update(@new_query, @old_query)
   end
 
   private
