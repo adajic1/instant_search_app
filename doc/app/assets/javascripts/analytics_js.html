@@ -73,6 +73,8 @@
   
     <li><a href="../../../app/assets/javascripts/application_js.html">application.js</a>
   
+    <li><a href="../../../app/assets/javascripts/articles_js.html">articles.js</a>
+  
     <li><a href="../../../app/assets/javascripts/cable_js.html">cable.js</a>
   
     <li><a href="../../../app/assets/javascripts/instant_search_js.html">instant_search.js</a>
@@ -80,6 +82,8 @@
     <li><a href="../../../app/assets/stylesheets/analytics_scss.html">analytics.scss</a>
   
     <li><a href="../../../app/assets/stylesheets/application_css.html">application.css</a>
+  
+    <li><a href="../../../app/assets/stylesheets/articles_scss.html">articles.scss</a>
   
     <li><a href="../../../app/assets/stylesheets/instant_search_scss.html">instant_search.scss</a>
   
@@ -123,42 +127,40 @@
 
 <p>$(document).ready(function() {</p>
 
-<pre>$(&#39;#clearAnalyticsTable&#39;).click(function (e) {
-  $.ajax({
-      method: &#39;DELETE&#39;,
-      url: &quot;destroy&quot;,   
-      data: { authenticity_token: $(&#39;[name=&quot;csrf-token&quot;]&#39;)[0].content},     
-      async: true,
-      success: function(result) {
-        $(&#39;#analyticsContent&#39;).html(result);
-      },
-      error: function(result) {
-        $(&#39;#analyticsContent&#39;).html(&quot;&lt;b&gt;Error:&lt;/b&gt; &quot;+result);
-      }
-  });  
+<pre>$(&#39;#clear_analytics_table&#39;).click(function (e) {
+        $.ajax({
+        method: &#39;DELETE&#39;,
+        url: &quot;destroy&quot;,   
+        data: { authenticity_token: $(&#39;[name=&quot;csrf-token&quot;]&#39;)[0].content},     
+        async: true,
+        success: function(result) {
+                        $(&#39;#analytics_content&#39;).html(result);
+        },
+        error: function(result) {
+                        $(&#39;#analytics_content&#39;).html(&quot;&lt;b&gt;Error:&lt;/b&gt; &quot;+JSON.stringify(result));
+        }
+        });  
 });
 
-$(document).on(&#39;click&#39;, &#39;[id^=&quot;destroy_&quot;]&#39;, function() {
-      // id attribute is expected to be of the following format: destroy_xx
-  var words = $(this).attr(&quot;id&quot;).split(&quot;_&quot;);
-  var id = words[words.length - 1];
-  $(&#39;#row_&#39;+id).remove();
-  if ($(&#39;[id^=&quot;destroy_&quot;]&#39;).length==0) 
-      $(&#39;#analyticsContent&#39;).html(&quot;All data cleared...&quot;);
-
-  $.ajax({
-      method: &#39;DELETE&#39;,
-      url: &quot;destroy_record&quot;,   
-      data: { authenticity_token: $(&#39;[name=&quot;csrf-token&quot;]&#39;)[0].content, id: id},     
-      async: true,
-      success: function(result) {
-        // alert(result);
-      },
-      error: function(result) {
-        $(&#39;#analyticsContent&#39;).html(&quot;&lt;b&gt;Error:&lt;/b&gt; &quot;+result);
-      }
-  });  
-
+$(document).on(&#39;click&#39;, &#39;[id^=&quot;analytics_destroy_&quot;]&#39;, function() {
+        // id attribute is expected to be of the following format: analytics_destroy_&lt;id&gt;
+var words = $(this).attr(&quot;id&quot;).split(&quot;_&quot;);
+        var id = words[words.length - 1];
+        $(&#39;#analytics_row_&#39;+id).remove();
+    if ($(&#39;[id^=&quot;analytics_destroy_&quot;]&#39;).length==0) 
+                $(&#39;#analytics_content&#39;).html(&quot;All data cleared...&quot;);
+        $.ajax({
+        method: &#39;DELETE&#39;,
+        url: &quot;destroy_record&quot;,   
+        data: { authenticity_token: $(&#39;[name=&quot;csrf-token&quot;]&#39;)[0].content, id: id},     
+        async: true,
+        success: function(result) {
+                        // alert(result);
+        },
+        error: function(result) {
+                        $(&#39;#analytics_content&#39;).html(&quot;&lt;b&gt;Error:&lt;/b&gt; &quot;+JSON.stringify(result));
+        }
+    }); 
 });</pre>
 
 <p>});</p>

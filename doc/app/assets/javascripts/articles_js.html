@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>analytics.scss - RDoc Documentation</title>
+<title>articles.js - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../../";
@@ -123,83 +123,91 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page app/assets/stylesheets/analytics.scss">
+<main role="main" aria-label="Page app/assets/javascripts/articles.js">
 
-<p>// Place all the styles related to the Analytics controller here. // They
-will automatically be included in application.css. // You can use Sass
-(SCSS) here: <a href="http://sass-lang.com">sass-lang.com</a>/ .button_red
-{</p>
+<p>$(document).ready(function() {</p>
 
-<pre>display: inline-block;
-text-align: center;
-vertical-align: middle;
-padding: 5px 9px;
-border: 1px solid #b82b10;
-border-radius: 8px;
-background: #ff501e;
-background: -webkit-gradient(linear, left top, left bottom, from(#ff501e), to(#b82b10));
-background: -moz-linear-gradient(top, #ff501e, #b82b10);
-background: linear-gradient(to bottom, #ff501e, #b82b10);
-text-shadow: #6d190a 1px 1px 1px;
-font: normal normal bold 14px arial;
-color: #ffffff;
-text-decoration: none;</pre>
+<pre>$(&#39;#clear_all_articles&#39;).click(function (e) {
+    $.ajax({
+        method: &#39;DELETE&#39;,
+        url: &quot;destroy&quot;,   
+        data: { authenticity_token: $(&#39;[name=&quot;csrf-token&quot;]&#39;)[0].content},     
+        async: true,
+        success: function(result) {
+                        $(&#39;#articles_list&#39;).html(&quot;&quot;);
+        },
+        error: function(result) {
+                        alert(JSON.stringify(result));
+        }
+    });  
+});
 
-<p>} .button_red:hover, .button_red:focus {</p>
+function articleTemplateInsert(article_id, article_description, article_content) {
+        var template = $(&quot;#article_template&quot;).html();
+        template=template.replace(new RegExp(&#39;&lt;ID&gt;&#39;, &#39;g&#39;), article_id);
+        $(&quot;#articles_list&quot;).prepend(template);
+        $(&quot;#article_description_&quot;+article_id).html(article_description);
+        $(&quot;#article_id_&quot;+article_id).html(article_id);
+        $(&quot;#article_content_&quot;+article_id).html(article_content);
+}
 
-<pre>border: 1px solid #d93213;
-background: #ff6024;
-background: -webkit-gradient(linear, left top, left bottom, from(#ff6024), to(#dd3413));
-background: -moz-linear-gradient(top, #ff6024, #dd3413);
-background: linear-gradient(to bottom, #ff6024, #dd3413);
-color: #ffffff;
-text-decoration: none;</pre>
+$(&#39;#save_article&#39;).click(function (e) {
+        var formData = new FormData($(&#39;#new_article_form&#39;)[0]);
+        formData.append(&#39;authenticity_token&#39;, $(&#39;[name=&quot;csrf-token&quot;]&#39;)[0].content);
+        $.ajax({
+            method: &#39;POST&#39;,
+            url: &quot;create&quot;,   
+            data: formData,     
+            async: true,
+            processData: false,
+            contentType: false,
+            success: function(result) {
+                        if (result.match(&quot;^ERROR:&quot;))
+                                alert(result);
+                        else {
+                                var article_id = result;
+                                articleTemplateInsert(article_id, $(&quot;#article_description&quot;).val(), $(&quot;#article_content&quot;).val());
+                                $(&#39;#new_article_form&#39;)[0].reset();            
+                        }
+            },
+                error: function(result) {
+                        alert(JSON.stringify(result));
+                }
+        });  
+});
 
-<p>} .button_red:active {</p>
+$(&#39;#clear_form_button&#39;).click(function (e) {
+        $(&#39;#new_article_form&#39;)[0].reset();
+});
 
-<pre>background: #b82b10;
-background: -webkit-gradient(linear, left top, left bottom, from(#b82b10), to(#b82b10));
-background: -moz-linear-gradient(top, #b82b10, #b82b10);
-background: linear-gradient(to bottom, #b82b10, #b82b10);</pre>
+$(document).on(&#39;click&#39;, &#39;[id^=&quot;article_destroy_&quot;]&#39;, function() {
+        // id attribute is expected to be of the following format: article_destroy_&lt;id&gt;
+        var words = $(this).attr(&quot;id&quot;).split(&quot;_&quot;);
+        var id = words[words.length - 1];
+        $(&#39;#article_span_&#39;+id).remove();
+        $.ajax({
+            method: &#39;DELETE&#39;,
+            url: &quot;destroy_article&quot;,   
+            data: { authenticity_token: $(&#39;[name=&quot;csrf-token&quot;]&#39;)[0].content, id: id},     
+            async: true,
+            success: function(result) {
+                        // alert(result);
+            },
+            error: function(result) {
+                        alert(JSON.stringify(result));
+            }
+        }); 
+});
 
-<p>}</p>
+$(document).on(&#39;page:load&#39;, $(&#39;#new_article_form&#39;)[0].reset());
 
-<p>.styled_table {</p>
+for (i = 0; i &lt; array_of_article_ids.length; i++) {
+        articleTemplateInsert(array_of_article_ids[i], 
+                                                  array_of_article_descriptions[i], 
+                                                  array_of_article_contents[i]);
+}</pre>
 
-<pre>font-family: &quot;Trebuchet MS&quot;, Arial, Helvetica, sans-serif;
-border-collapse: collapse;
-min-width: 350px;</pre>
-
-<p>}</p>
-
-<p>.styled_table td, .styled_table th {</p>
-
-<pre>border: 1px solid #ddd;
-padding: 8px;</pre>
-
-<p>}</p>
-
-<p>.styled_table tr:nth-child(even){background-color: f2f2f2;}</p>
-
-<p>.styled_table tr:hover {background-color: ddd;}</p>
-
-<p>.styled_table th {</p>
-
-<pre>padding-top: 12px;
-padding-bottom: 12px;
-text-align: left;
-background-color: #4CAF50;
-color: white;</pre>
-
-<p>}</p>
-<dl class="rdoc-list label-list"><dt>id^=“analytics_destroy_”
-<dd>
-<p>{</p>
-</dd></dl>
-
-<pre>cursor: pointer;</pre>
-
-<p>}</p>
+<p>});</p>
 </main>
 
 

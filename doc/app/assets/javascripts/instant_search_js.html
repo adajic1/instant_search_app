@@ -73,6 +73,8 @@
   
     <li><a href="../../../app/assets/javascripts/application_js.html">application.js</a>
   
+    <li><a href="../../../app/assets/javascripts/articles_js.html">articles.js</a>
+  
     <li><a href="../../../app/assets/javascripts/cable_js.html">cable.js</a>
   
     <li><a href="../../../app/assets/javascripts/instant_search_js.html">instant_search.js</a>
@@ -80,6 +82,8 @@
     <li><a href="../../../app/assets/stylesheets/analytics_scss.html">analytics.scss</a>
   
     <li><a href="../../../app/assets/stylesheets/application_css.html">application.css</a>
+  
+    <li><a href="../../../app/assets/stylesheets/articles_scss.html">articles.scss</a>
   
     <li><a href="../../../app/assets/stylesheets/instant_search_scss.html">instant_search.scss</a>
   
@@ -124,82 +128,82 @@
 <p>$(document).ready(function() {</p>
 
 <pre>// Configurable settings:
-var refreshInterval=800; // In milliseconds
-var iSearchOn=true; // Whether instant search is ON or OFF by default
-// ------------------------------------------------------------------
+var refresh_interval=800; // In milliseconds
+var instant_search_on=true; // Whether instant search is ON or OFF by default
+// --------------------------------------------------------------------------
 
 // Initialization
 if ($(&quot;#searchbox&quot;).length &gt; 0) {
-  var myInterval=&#39;&#39;;
-  var oldValue=0;
-  if (iSearchOn) startISearch();
-  else stopISearch();
+        var my_interval=&#39;&#39;;
+        var old_value=0;
+        if (instant_search_on) startInstantSearch();
+        else stopInstantSearch();
 }  
 
 function submitIfNeeded() {
-  newValue = $(&#39;#searchbox&#39;).val();
-  if (oldValue===0 || newValue!=oldValue) {
-    oldValue=newValue;
-    // Here goes ajax POST request with :body parameter
-    $.ajax({
-      method: &quot;POST&quot;,
-      url: &quot;instant_search/create&quot;,
-      data: { body: newValue, authenticity_token: $(&#39;[name=&quot;csrf-token&quot;]&#39;)[0].content},
-      async: true,
-      success: function(result) {
-        if (result.length==0) result=&quot;-empty-&quot;;
-        $(&#39;#result&#39;).html(&quot;&lt;b&gt;Response:&lt;/b&gt; &quot;+result);
-        $(&#39;#result&#39;).css(&quot;visibility&quot;,&quot;visible&quot;);
-      },
-      error: function(result) {
-        if (result.length==0) result=&quot;-empty-&quot;;
-        $(&#39;#result&#39;).html(&quot;&lt;b&gt;Response:&lt;/b&gt; &quot;+result);
-        $(&#39;#result&#39;).css(&quot;visibility&quot;,&quot;visible&quot;);
-      }
-    });
-  }
+    new_value = $(&#39;#searchbox&#39;).val();
+    if (old_value===0 || new_value!=old_value) {
+                old_value=new_value;
+                // Here goes ajax POST request with :body parameter
+                $.ajax({
+                method: &quot;POST&quot;,
+                url: &quot;instant_search/create&quot;,
+                data: { body: new_value, authenticity_token: $(&#39;[name=&quot;csrf-token&quot;]&#39;)[0].content},
+                async: true,
+                success: function(result) {
+                                if (result.length==0) result=&quot;-empty-&quot;;
+                                $(&#39;#result&#39;).html(&quot;&lt;b&gt;Response:&lt;/b&gt; &quot;+result);
+                                $(&#39;#result&#39;).css(&quot;visibility&quot;,&quot;visible&quot;);
+                },
+                error: function(result) {
+                                if (result.length==0) result=&quot;-empty-&quot;;
+                                $(&#39;#result&#39;).html(&quot;&lt;b&gt;Response:&lt;/b&gt; &quot;+JSON.stringify(result));
+                                $(&#39;#result&#39;).css(&quot;visibility&quot;,&quot;visible&quot;);
+                }
+                });
+        }
 }
 
 function setIsearchInfo() {
-  if (iSearchOn) {
-    $(&#39;#infoIsearch&#39;).css(&#39;color&#39;, &#39;blue&#39;);
-    $(&#39;#infoIsearch&#39;).html(&quot;ON&quot;);      
-    $(&#39;#note&#39;).css(&#39;visibility&#39;, &#39;hidden&#39;);
-  } else {
-    $(&#39;#infoIsearch&#39;).css(&#39;color&#39;, &#39;red&#39;);
-    $(&#39;#infoIsearch&#39;).html(&quot;OFF&quot;);
-    $(&#39;#note&#39;).css(&#39;visibility&#39;, &#39;visible&#39;);
-  }
+        if (instant_search_on) {
+                $(&#39;#info_instant_search&#39;).css(&#39;color&#39;, &#39;blue&#39;);
+                $(&#39;#info_instant_search&#39;).html(&quot;ON&quot;);      
+                $(&#39;#note&#39;).css(&#39;visibility&#39;, &#39;hidden&#39;);
+        } else {
+                $(&#39;#info_instant_search&#39;).css(&#39;color&#39;, &#39;red&#39;);
+                $(&#39;#info_instant_search&#39;).html(&quot;OFF&quot;);
+                $(&#39;#note&#39;).css(&#39;visibility&#39;, &#39;visible&#39;);
+        }
 }
 
-function startISearch() {
-  myInterval=setInterval(submitIfNeeded, refreshInterval);
-  setIsearchInfo();
+function startInstantSearch() {
+        my_interval=setInterval(submitIfNeeded, refresh_interval);
+        setIsearchInfo();
 }
 
-function stopISearch() {
-  clearInterval(myInterval);
-  setIsearchInfo(); 
+function stopInstantSearch() {
+        clearInterval(my_interval);
+        setIsearchInfo(); 
 }
 
 $(&#39;#searchbox&#39;).keypress(function (e) {
-  if(e.which ==13) { // Enter is pressed
-    submitIfNeeded();
-  }        
+        if(e.which ==13) { // Enter is pressed
+                submitIfNeeded();
+        }        
 });
 
-$(&#39;#btnTurnOn&#39;).click(function (e) {
-  if (iSearchOn==false) {
-    iSearchOn=true;
-    startISearch();
-  }     
+$(&#39;#button_turn_on&#39;).click(function (e) {
+        if (instant_search_on==false) {
+                instant_search_on=true;
+                startInstantSearch();
+        }     
 });
 
-$(&#39;#btnTurnOff&#39;).click(function (e) {
-  if (iSearchOn==true) {
-    iSearchOn=false;
-    stopISearch();    
-  }     
+$(&#39;#button_turn_off&#39;).click(function (e) {
+        if (instant_search_on==true) {
+                instant_search_on=false;
+                stopInstantSearch();    
+        }     
 });
 
 $(document).on(&#39;page:load&#39;, $(&#39;#searchbox&#39;).val(&#39;&#39;));</pre>

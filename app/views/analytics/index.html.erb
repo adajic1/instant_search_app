@@ -6,13 +6,13 @@
 		<br>
 		<table cellpadding=5 border=1 class="styled_table">
 			<tr>
-				<th><b>Phrase</b></th>
+				<th><b>Search query</b></th>
 				<th width="1px"><b>Counter</b></th>
 				<th width="1px"><b></b></th>
 			</tr>
 			<% @analytics.each do |data| %>
 			<tr id="analytics_row_<%= data.id %>">
-			    <td><%= data.phrase %></td>
+			    <td><%= data.search_query %></td>
 			    <td><%= data.counter %></td>
 			    <td>
 			    	<font color="blue">

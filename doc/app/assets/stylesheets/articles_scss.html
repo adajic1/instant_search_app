@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>analytics.scss - RDoc Documentation</title>
+<title>articles.scss - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../../../";
@@ -123,76 +123,64 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page app/assets/stylesheets/analytics.scss">
+<main role="main" aria-label="Page app/assets/stylesheets/articles.scss">
 
-<p>// Place all the styles related to the Analytics controller here. // They
+<p>// Place all the styles related to the articles controller here. // They
 will automatically be included in application.css. // You can use Sass
-(SCSS) here: <a href="http://sass-lang.com">sass-lang.com</a>/ .button_red
-{</p>
+(SCSS) here: <a href="http://sass-lang.com">sass-lang.com</a>/
+table.blue_table {</p>
 
-<pre>display: inline-block;
-text-align: center;
-vertical-align: middle;
-padding: 5px 9px;
-border: 1px solid #b82b10;
-border-radius: 8px;
-background: #ff501e;
-background: -webkit-gradient(linear, left top, left bottom, from(#ff501e), to(#b82b10));
-background: -moz-linear-gradient(top, #ff501e, #b82b10);
-background: linear-gradient(to bottom, #ff501e, #b82b10);
-text-shadow: #6d190a 1px 1px 1px;
-font: normal normal bold 14px arial;
-color: #ffffff;
-text-decoration: none;</pre>
-
-<p>} .button_red:hover, .button_red:focus {</p>
-
-<pre>border: 1px solid #d93213;
-background: #ff6024;
-background: -webkit-gradient(linear, left top, left bottom, from(#ff6024), to(#dd3413));
-background: -moz-linear-gradient(top, #ff6024, #dd3413);
-background: linear-gradient(to bottom, #ff6024, #dd3413);
-color: #ffffff;
-text-decoration: none;</pre>
-
-<p>} .button_red:active {</p>
-
-<pre>background: #b82b10;
-background: -webkit-gradient(linear, left top, left bottom, from(#b82b10), to(#b82b10));
-background: -moz-linear-gradient(top, #b82b10, #b82b10);
-background: linear-gradient(to bottom, #b82b10, #b82b10);</pre>
-
-<p>}</p>
-
-<p>.styled_table {</p>
-
-<pre>font-family: &quot;Trebuchet MS&quot;, Arial, Helvetica, sans-serif;
-border-collapse: collapse;
-min-width: 350px;</pre>
-
-<p>}</p>
-
-<p>.styled_table td, .styled_table th {</p>
-
-<pre>border: 1px solid #ddd;
-padding: 8px;</pre>
-
-<p>}</p>
-
-<p>.styled_table tr:nth-child(even){background-color: f2f2f2;}</p>
-
-<p>.styled_table tr:hover {background-color: ddd;}</p>
-
-<p>.styled_table th {</p>
-
-<pre>padding-top: 12px;
-padding-bottom: 12px;
+<pre>border: 1px solid #1C6EA4;
+background-color: #EEEEEE;
+width: 80%;
 text-align: left;
-background-color: #4CAF50;
-color: white;</pre>
+border-collapse: collapse;</pre>
+
+<p>} table.blue_table td, table.blue_table th {</p>
+
+<pre>border: 1px solid #AAAAAA;
+padding: 2px 8px;</pre>
+
+<p>} table.blue_table td p, table.blue_table th p {</p>
+
+<pre>display: inline;</pre>
+
+<p>} table.blue_table tbody td {</p>
+
+<pre>font-size: 13px;</pre>
+
+<p>} table.blue_table tr:nth-child(even) {</p>
+
+<pre>background: #D0E4F5;</pre>
+
+<p>} table.blue_table thead {</p>
+
+<pre>background: #1C6EA4;
+background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);</pre>
+
+<p>} table.blue_table thead th {</p>
+
+<pre>font-size: 15px;
+font-weight: bold;
+color: #FFFFFF;</pre>
 
 <p>}</p>
-<dl class="rdoc-list label-list"><dt>id^=“analytics_destroy_”
+
+<p>.article_id, .article_delete {</p>
+
+<pre>white-space: nowrap;
+width: 1px;</pre>
+
+<p>}</p>
+
+<p>article_template {</p>
+
+<pre>display: none;</pre>
+
+<p>}</p>
+<dl class="rdoc-list label-list"><dt>id^=“article_destroy_”
 <dd>
 <p>{</p>
 </dd></dl>

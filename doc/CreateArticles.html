@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Session - RDoc Documentation</title>
+<title>class CreateArticles - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -59,7 +59,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="ApplicationRecord.html">ApplicationRecord</a>
+  <p class="link">ActiveRecord::Migration[5.2]
   
 </div>
 
@@ -71,7 +71,7 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-get_or_create">::get_or_create</a>
+    <li ><a href="#method-i-change">#change</a>
     
   </ul>
 </div>
@@ -79,9 +79,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Session">
-  <h1 id="class-Session" class="class">
-    class Session
+<main role="main" aria-labelledby="class-CreateArticles">
+  <h1 id="class-CreateArticles" class="class">
+    class CreateArticles
   </h1>
 
   <section class="description">
@@ -99,17 +99,17 @@
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Public Class Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
-      <div id="method-c-get_or_create" class="method-detail ">
+      <div id="method-i-change" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">get_or_create</span><span
-            class="method-args">(ip_string)</span>
+          <span class="method-name">change</span><span
+            class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -118,23 +118,20 @@
 
         <div class="method-description">
           
-          <p>Get <a href="Session.html">Session</a> instance with given :body -&gt;
-ip_string. If it doesn&#39;t exist, it will be created.</p>
-<ul><li>
-<p><strong>Returns</strong> :</p>
-<ul><li>
-<p><a href="Session.html">Session</a> object</p>
-</li></ul>
-</li></ul>
+          
           
           
 
           
-          <div class="method-source-code" id="get_or_create-source">
-            <pre><span class="ruby-comment"># File app/models/session.rb, line 7</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_or_create</span>(<span class="ruby-identifier">ip_string</span>) 
-  <span class="ruby-identifier">session</span> = <span class="ruby-identifier">find_by_body</span>(<span class="ruby-identifier">ip_string</span>)
-  <span class="ruby-identifier">session</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-constant">Session</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">body:</span> <span class="ruby-identifier">ip_string</span>, <span class="ruby-value">lastpartial:</span> <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">session</span>
+          <div class="method-source-code" id="change-source">
+            <pre><span class="ruby-comment"># File db/migrate/20180904183518_create_articles.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">change</span>
+  <span class="ruby-identifier">create_table</span> <span class="ruby-value">:articles</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span> <span class="ruby-value">:description</span>
+    <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span> <span class="ruby-value">:content</span>
+
+    <span class="ruby-identifier">t</span>.<span class="ruby-identifier">timestamps</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

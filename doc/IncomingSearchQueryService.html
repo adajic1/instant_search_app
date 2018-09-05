@@ -212,7 +212,7 @@ accordingly.</p>
   <span class="ruby-identifier">session</span>.<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:lastpartial</span>, <span class="ruby-ivar">@new_query</span>) 
       
   <span class="ruby-constant">SearchQuery</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">body:</span> <span class="ruby-ivar">@new_query</span>, <span class="ruby-value">session:</span> <span class="ruby-identifier">session</span>) <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@new_query</span>.<span class="ruby-identifier">blank?</span>
-  <span class="ruby-constant">Analytic</span>.<span class="ruby-identifier">update_for_last_two_queries</span>(<span class="ruby-ivar">@new_query</span>, <span class="ruby-ivar">@old_query</span>)
+  <span class="ruby-constant">Analytic</span>.<span class="ruby-identifier">compare_and_update</span>(<span class="ruby-ivar">@new_query</span>, <span class="ruby-ivar">@old_query</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

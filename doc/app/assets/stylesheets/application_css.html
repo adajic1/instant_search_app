@@ -52,17 +52,6 @@
   </div>
 
   
-<div class="nav-section">
-  <h3>Table of Contents</h3>
-
-  <ul class="link-list" role="directory">
-    <li><a href="#label-require_tree+.">require_tree .</a>
-    <li><a href="#label-require_self">require_self</a>
-    <li><a href="#label-require_tree+..-2F..-2F..-2Fvendor-2Fassets-2Fstylesheets-2F.">require_tree ../../../vendor/assets/stylesheets/.</a>
-    <li><a href="#label-require_tree+..-2F..-2F..-2Flib-2Fassets-2Fstylesheets-2F.">require_tree ../../../lib/assets/stylesheets/.</a>
-  </ul>
-</div>
-
 
   <div id="project-metadata">
     <div id="fileindex-section" class="nav-section">
@@ -84,6 +73,8 @@
   
     <li><a href="../../../app/assets/javascripts/application_js.html">application.js</a>
   
+    <li><a href="../../../app/assets/javascripts/articles_js.html">articles.js</a>
+  
     <li><a href="../../../app/assets/javascripts/cable_js.html">cable.js</a>
   
     <li><a href="../../../app/assets/javascripts/instant_search_js.html">instant_search.js</a>
@@ -91,6 +82,8 @@
     <li><a href="../../../app/assets/stylesheets/analytics_scss.html">analytics.scss</a>
   
     <li><a href="../../../app/assets/stylesheets/application_css.html">application.css</a>
+  
+    <li><a href="../../../app/assets/stylesheets/articles_scss.html">articles.scss</a>
   
     <li><a href="../../../app/assets/stylesheets/instant_search_scss.html">instant_search.scss</a>
   
@@ -132,24 +125,27 @@
 
 <main role="main" aria-label="Page app/assets/stylesheets/application.css">
 
-<pre>This is a manifest file that&#39;ll be compiled into application.css, which will include all the files
-listed below.
+<pre> This is a manifest file that&#39;ll be compiled into application.css, which will include all the files
+ listed below.
 
-Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin&#39;s
-vendor/assets/stylesheets directory can be referenced here using a relative path.
+ Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin&#39;s
+ vendor/assets/stylesheets directory can be referenced here using a relative path.
 
-You&#39;re free to add application-wide styles to this file and they&#39;ll appear at the bottom of the
-compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
-files in this directory. Styles in this file should be added after the last require_* statement.
-It is generally better to create a new file per style scope.</pre>
+ You&#39;re free to add application-wide styles to this file and they&#39;ll appear at the bottom of the
+ compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ files in this directory. Styles in this file should be added after the last require_* statement.
+ It is generally better to create a new file per style scope.
 
-<h1 id="label-require_tree+.">require_tree .<span><a href="#label-require_tree+.">&para;</a> <a href="#top">&uarr;</a></span></h1>
+= require_tree .
+= require_self
+= require_tree ../../../vendor/assets/stylesheets/.
+= require_tree ../../../lib/assets/stylesheets/.</pre>
 
-<h1 id="label-require_self">require_self<span><a href="#label-require_self">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<p><a href="type=button">input</a> {</p>
 
-<h1 id="label-require_tree+..-2F..-2F..-2Fvendor-2Fassets-2Fstylesheets-2F.">require_tree ../../../vendor/assets/stylesheets/.<span><a href="#label-require_tree+..-2F..-2F..-2Fvendor-2Fassets-2Fstylesheets-2F.">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<pre>cursor: pointer;</pre>
 
-<h1 id="label-require_tree+..-2F..-2F..-2Flib-2Fassets-2Fstylesheets-2F.">require_tree ../../../lib/assets/stylesheets/.<span><a href="#label-require_tree+..-2F..-2F..-2Flib-2Fassets-2Fstylesheets-2F.">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<p>}</p>
 </main>
 
 

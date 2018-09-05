@@ -71,7 +71,7 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-update_for_last_two_queries">::update_for_last_two_queries</a>
+    <li ><a href="#method-c-compare_and_update">::compare_and_update</a>
     
   </ul>
 </div>
@@ -105,10 +105,10 @@
        </header>
 
     
-      <div id="method-c-update_for_last_two_queries" class="method-detail ">
+      <div id="method-c-compare_and_update" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">update_for_last_two_queries</span><span
+          <span class="method-name">compare_and_update</span><span
             class="method-args">(new_query_string, old_query_string)</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -119,30 +119,20 @@
         <div class="method-description">
           
           <p>Update analytics of new_query_string and old_query_string</p>
-<ul><li>
-<p><strong>Args</strong>    :</p>
-<ul><li>
-<p><code>new_query_string</code> -&gt; new string submitted as search query</p>
-</li><li>
-<p><code>old_query_string</code> -&gt; previous string submitted by the same
-user</p>
-</li></ul>
-</li></ul>
           
           
 
           
-          <div class="method-source-code" id="update_for_last_two_queries-source">
-            <pre><span class="ruby-comment"># File app/models/analytic.rb, line 7</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">update_for_last_two_queries</span>(<span class="ruby-identifier">new_query_string</span>, <span class="ruby-identifier">old_query_string</span>) 
+          <div class="method-source-code" id="compare_and_update-source">
+            <pre><span class="ruby-comment"># File app/models/analytic.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">compare_and_update</span>(<span class="ruby-identifier">new_query_string</span>, <span class="ruby-identifier">old_query_string</span>) 
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">new_query_string</span>.<span class="ruby-identifier">blank?</span>
-  <span class="ruby-identifier">levenstein_array</span> = <span class="ruby-constant">LevensteinService</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">new_query_string</span>, <span class="ruby-identifier">old_query_string</span>)
-  <span class="ruby-identifier">number_of_insertions</span>, <span class="ruby-identifier">number_of_deletions</span>, <span class="ruby-identifier">number_of_substitutions</span> = <span class="ruby-identifier">levenstein_array</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">number_of_substitutions</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-comment"># It&#39;s a new phrase</span>
-    <span class="ruby-constant">Analytic</span>.<span class="ruby-identifier">count</span>(<span class="ruby-identifier">new_query_string</span>, <span class="ruby-value">1</span>)
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">number_of_insertions</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-comment"># It&#39;s an update of the previous phrase</span>
-    <span class="ruby-constant">Analytic</span>.<span class="ruby-identifier">count</span>(<span class="ruby-identifier">old_query_string</span>, <span class="ruby-value">-1</span>)
-    <span class="ruby-constant">Analytic</span>.<span class="ruby-identifier">count</span>(<span class="ruby-identifier">new_query_string</span>, <span class="ruby-value">1</span>)
+  <span class="ruby-identifier">levenstein_object</span> = <span class="ruby-constant">LevensteinService</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">new_query_string</span>, <span class="ruby-identifier">old_query_string</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">levenstein_object</span>.<span class="ruby-identifier">number_of_substitutions</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-comment"># It&#39;s a new search query</span>
+    <span class="ruby-constant">Analytic</span>.<span class="ruby-identifier">counter_update_for</span>(<span class="ruby-identifier">new_query_string</span>, <span class="ruby-value">1</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">levenstein_object</span>.<span class="ruby-identifier">number_of_insertions</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-comment"># It&#39;s an update of the previous search query</span>
+    <span class="ruby-constant">Analytic</span>.<span class="ruby-identifier">counter_update_for</span>(<span class="ruby-identifier">old_query_string</span>, <span class="ruby-value">-1</span>)
+    <span class="ruby-constant">Analytic</span>.<span class="ruby-identifier">counter_update_for</span>(<span class="ruby-identifier">new_query_string</span>, <span class="ruby-value">1</span>)
   <span class="ruby-keyword">end</span>       
 <span class="ruby-keyword">end</span></pre>
           </div>

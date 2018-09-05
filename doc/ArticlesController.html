@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class InstantSearchController - RDoc Documentation</title>
+<title>class ArticlesController - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -73,6 +73,10 @@
     
     <li ><a href="#method-i-create">#create</a>
     
+    <li ><a href="#method-i-destroy">#destroy</a>
+    
+    <li ><a href="#method-i-destroy_article">#destroy_article</a>
+    
     <li ><a href="#method-i-index">#index</a>
     
   </ul>
@@ -81,9 +85,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-InstantSearchController">
-  <h1 id="class-InstantSearchController" class="class">
-    class InstantSearchController
+<main role="main" aria-labelledby="class-ArticlesController">
+  <h1 id="class-ArticlesController" class="class">
+    class ArticlesController
   </h1>
 
   <section class="description">
@@ -120,17 +124,88 @@
 
         <div class="method-description">
           
-          <p>New search query</p>
+          
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/instant_search_controller.rb, line 9</span>
+            <pre><span class="ruby-comment"># File app/controllers/articles_controller.rb, line 5</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
-  <span class="ruby-identifier">query_string</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:body</span>] 
-  <span class="ruby-constant">IncomingSearchQueryService</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">query_string</span>, <span class="ruby-identifier">request</span>.<span class="ruby-identifier">remote_ip</span>)       
-  <span class="ruby-identifier">send_data</span> <span class="ruby-identifier">query_string</span>
+  <span class="ruby-keyword">if</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@params_valid</span>) 
+    <span class="ruby-identifier">send_data</span> <span class="ruby-string">&quot;ERROR: Invalid parameters&quot;</span>
+  <span class="ruby-keyword">else</span> 
+    <span class="ruby-identifier">new_article</span> = <span class="ruby-constant">Article</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">article_params</span>)
+    <span class="ruby-identifier">send_data</span> <span class="ruby-identifier">new_article</span>.<span class="ruby-identifier">id</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-destroy" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">destroy</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Destroys all articles</p>
+          
+          
+
+          
+          <div class="method-source-code" id="destroy-source">
+            <pre><span class="ruby-comment"># File app/controllers/articles_controller.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">destroy</span>
+  <span class="ruby-constant">Article</span>.<span class="ruby-identifier">destroy_all</span>
+  <span class="ruby-identifier">send_data</span> <span class="ruby-string">&quot;Cleared successfully...&quot;</span> 
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-destroy_article" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">destroy_article</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Destroys particular article</p>
+          
+          
+
+          
+          <div class="method-source-code" id="destroy_article-source">
+            <pre><span class="ruby-comment"># File app/controllers/articles_controller.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">destroy_article</span>
+  <span class="ruby-constant">Article</span>.<span class="ruby-identifier">destroy</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-identifier">send_data</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>] 
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -155,15 +230,16 @@
 
         <div class="method-description">
           
-          <p>Show instant search webpage</p>
+          <p>Show articles</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/instant_search_controller.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/controllers/articles_controller.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
-  <span class="ruby-comment"># render template: &quot;instant_search/index&quot; # not needed because ruby renders it by default</span>
+  <span class="ruby-ivar">@articles</span>=<span class="ruby-constant">Article</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">id:</span> <span class="ruby-value">:ASC</span>)
+  <span class="ruby-comment"># render template: &quot;articles/index&quot; # not needed because ruby renders it by default</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

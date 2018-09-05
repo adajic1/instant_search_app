@@ -51,6 +51,9 @@
     <a href="app/assets/javascripts/application_js.html">application.js</a>
   </li>
     <li class="file">
+    <a href="app/assets/javascripts/articles_js.html">articles.js</a>
+  </li>
+    <li class="file">
     <a href="app/assets/javascripts/cable_js.html">cable.js</a>
   </li>
     <li class="file">
@@ -61,13 +64,9 @@
   </li>
     <li class="file">
     <a href="app/assets/stylesheets/application_css.html">application.css</a>
-
-    <ul>
-      <li><a href="app/assets/stylesheets/application_css.html#label-require_tree+.">require_tree .</a>
-      <li><a href="app/assets/stylesheets/application_css.html#label-require_self">require_self</a>
-      <li><a href="app/assets/stylesheets/application_css.html#label-require_tree+..-2F..-2F..-2Fvendor-2Fassets-2Fstylesheets-2F.">require_tree ../../../vendor/assets/stylesheets/.</a>
-      <li><a href="app/assets/stylesheets/application_css.html#label-require_tree+..-2F..-2F..-2Flib-2Fassets-2Fstylesheets-2F.">require_tree ../../../lib/assets/stylesheets/.</a>
-    </ul>
+  </li>
+    <li class="file">
+    <a href="app/assets/stylesheets/articles_scss.html">articles.scss</a>
   </li>
     <li class="file">
     <a href="app/assets/stylesheets/instant_search_scss.html">instant_search.scss</a>
@@ -170,11 +169,29 @@
   <li class="class">
     <a href="ApplicationSystemTestCase.html">ApplicationSystemTestCase</a>
   </li>
+  <li class="class">
+    <a href="Article.html">Article</a>
+  </li>
+  <li class="class">
+    <a href="ArticleTest.html">ArticleTest</a>
+  </li>
+  <li class="class">
+    <a href="ArticlesController.html">ArticlesController</a>
+  </li>
+  <li class="class">
+    <a href="ArticlesControllerTest.html">ArticlesControllerTest</a>
+  </li>
+  <li class="module">
+    <a href="ArticlesHelper.html">ArticlesHelper</a>
+  </li>
   <li class="module">
     <a href="Bundler.html">Bundler</a>
   </li>
   <li class="class">
     <a href="CreateAnalytics.html">CreateAnalytics</a>
+  </li>
+  <li class="class">
+    <a href="CreateArticles.html">CreateArticles</a>
   </li>
   <li class="class">
     <a href="CreateSearchQueries.html">CreateSearchQueries</a>
@@ -237,6 +254,11 @@
     <span class="container">LevensteinService</span>
 
   <li class="method">
+    <a href="Analytic.html#method-c-compare_and_update">::compare_and_update</a>
+    &mdash;
+    <span class="container">Analytic</span>
+
+  <li class="method">
     <a href="Session.html#method-c-get_or_create">::get_or_create</a>
     &mdash;
     <span class="container">Session</span>
@@ -250,11 +272,6 @@
     <a href="LevensteinService.html#method-c-new">::new</a>
     &mdash;
     <span class="container">LevensteinService</span>
-
-  <li class="method">
-    <a href="Analytic.html#method-c-update_for_last_two_queries">::update_for_last_two_queries</a>
-    &mdash;
-    <span class="container">Analytic</span>
 
   <li class="method">
     <a href="IncomingSearchQueryService.html#method-i-call">#call</a>
@@ -282,6 +299,16 @@
     <span class="container">CreateSearchQueries</span>
 
   <li class="method">
+    <a href="CreateArticles.html#method-i-change">#change</a>
+    &mdash;
+    <span class="container">CreateArticles</span>
+
+  <li class="method">
+    <a href="ArticlesController.html#method-i-create">#create</a>
+    &mdash;
+    <span class="container">ArticlesController</span>
+
+  <li class="method">
     <a href="InstantSearchController.html#method-i-create">#create</a>
     &mdash;
     <span class="container">InstantSearchController</span>
@@ -292,6 +319,16 @@
     <span class="container">AnalyticsController</span>
 
   <li class="method">
+    <a href="ArticlesController.html#method-i-destroy">#destroy</a>
+    &mdash;
+    <span class="container">ArticlesController</span>
+
+  <li class="method">
+    <a href="ArticlesController.html#method-i-destroy_article">#destroy_article</a>
+    &mdash;
+    <span class="container">ArticlesController</span>
+
+  <li class="method">
     <a href="AnalyticsController.html#method-i-destroy_record">#destroy_record</a>
     &mdash;
     <span class="container">AnalyticsController</span>
@@ -300,6 +337,11 @@
     <a href="AnalyticsController.html#method-i-index">#index</a>
     &mdash;
     <span class="container">AnalyticsController</span>
+
+  <li class="method">
+    <a href="ArticlesController.html#method-i-index">#index</a>
+    &mdash;
+    <span class="container">ArticlesController</span>
 
   <li class="method">
     <a href="InstantSearchController.html#method-i-index">#index</a>

@@ -99,7 +99,91 @@
     
 
     
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="DELETION_COST">DELETION_COST
+        
+        <dd>
+        
+      
+        <dt id="INSERTION_COST">INSERTION_COST
+        
+        <dd><p>Constants</p>
+        
+      
+        <dt id="SUBSTITUTION_COST">SUBSTITUTION_COST
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
 
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-levenstein_distance" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">levenstein_distance</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Attributes</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-number_of_deletions" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">number_of_deletions</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Attributes</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-number_of_insertions" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">number_of_insertions</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Attributes</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-number_of_substitutions" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">number_of_substitutions</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Attributes</p>
+        
+        </div>
+      </div>
+      
+    </section>
     
 
     
@@ -113,7 +197,7 @@
         
         <div class="method-heading">
           <span class="method-name">call</span><span
-            class="method-args">(target, source, insertion_cost=1, deletion_cost=1, substitution_cost=1)</span>
+            class="method-args">(target_string, source_string)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -123,37 +207,14 @@
         <div class="method-description">
           
           <p>Just passing values to initialize, then calling .call method</p>
-<ul><li>
-<p><strong>Args</strong>    :</p>
-<ul><li>
-<p><code>target</code> -&gt; target string for Levenstein distance calculation</p>
-</li><li>
-<p><code>source</code> -&gt; source string for Levenstein distance calculation</p>
-</li><li>
-<p><code>insertion_cost</code> -&gt; cost value of char insertion</p>
-</li><li>
-<p><code>deletion_cost</code> -&gt; cost value of char deletion</p>
-</li><li>
-<p><code>substitution_cost</code> -&gt; cost value of char substitution</p>
-</li></ul>
-</li><li>
-<p><strong>Returns</strong> :</p>
-<ul><li>
-<p>Levenstein distance in form of an array 1x3:</p>
-</li><li><dl class="rdoc-list label-list"><dt>number_of_insertions, number_of_deletions, number_of_substitutions
-<dd></dd></dl>
-</li><li>
-<p>You can sum those 3 values to get total Levenstein distance.</p>
-</li></ul>
-</li></ul>
           
           
 
           
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File app/services/levenstein_service.rb, line 14</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">source</span>, <span class="ruby-identifier">insertion_cost</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">deletion_cost</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">substitution_cost</span>=<span class="ruby-value">1</span>)
-  <span class="ruby-identifier">new</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">source</span>, <span class="ruby-identifier">insertion_cost</span>, <span class="ruby-identifier">deletion_cost</span>, <span class="ruby-identifier">substitution_cost</span>).<span class="ruby-identifier">call</span>
+            <pre><span class="ruby-comment"># File app/services/levenstein_service.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">call</span>(<span class="ruby-identifier">target_string</span>, <span class="ruby-identifier">source_string</span>)
+  <span class="ruby-identifier">new</span>(<span class="ruby-identifier">target_string</span>, <span class="ruby-identifier">source_string</span>).<span class="ruby-identifier">call</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -169,7 +230,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(target, source, insertion_cost=1, deletion_cost=1, substitution_cost=1)</span>
+            class="method-args">(target_string, source_string)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -178,19 +239,16 @@
 
         <div class="method-description">
           
-          <p>Initialize instance variables: @target, @source, @ins, @del, @sub</p>
+          <p>Initialize instance variables</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/services/levenstein_service.rb, line 74</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">source</span>, <span class="ruby-identifier">insertion_cost</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">deletion_cost</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">substitution_cost</span>=<span class="ruby-value">1</span>)
-  <span class="ruby-ivar">@target</span> = <span class="ruby-identifier">target</span> <span class="ruby-comment"># target string</span>
-  <span class="ruby-ivar">@source</span> = <span class="ruby-identifier">source</span> <span class="ruby-comment"># source string</span>
-  <span class="ruby-ivar">@insertion_cost</span> = <span class="ruby-identifier">insertion_cost</span> <span class="ruby-comment"># weighted cost of insertion</span>
-  <span class="ruby-ivar">@deletion_cost</span> = <span class="ruby-identifier">deletion_cost</span> <span class="ruby-comment"># weighted cost of deletion</span>
-  <span class="ruby-ivar">@substitution_cost</span> = <span class="ruby-identifier">substitution_cost</span> <span class="ruby-comment"># weighted cost of substitution</span>
+            <pre><span class="ruby-comment"># File app/services/levenstein_service.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">target_string</span>, <span class="ruby-identifier">source_string</span>)
+  <span class="ruby-ivar">@target_string</span> = <span class="ruby-identifier">target_string</span>
+  <span class="ruby-ivar">@source_string</span> = <span class="ruby-identifier">source_string</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -223,16 +281,20 @@
 
         <div class="method-description">
           
-          <p>Calculate Levenstein distance between strings with weighted costs.
-Separately store deletions, insertions and substitutions.</p>
+          <p>Calculates Levenstein distance between strings with weighted costs.
+Separately stores deletions, insertions, substitutions and levenstein
+distance as attributes.</p>
 <ul><li>
 <p><strong>Returns</strong> :</p>
 <ul><li>
-<p>Levenstein distance in form of an array 1x3:</p>
-</li><li><dl class="rdoc-list label-list"><dt>number_of_insertions, number_of_deletions, number_of_substitutions
-<dd></dd></dl>
-</li><li>
-<p>You can sum those 3 values to get total Levenstein distance.</p>
+<p>self object After calling this method you can access attributes:  <a
+href="LevensteinService.html#attribute-i-number_of_insertions">#number_of_insertions</a>,
+<a
+href="LevensteinService.html#attribute-i-number_of_deletions">#number_of_deletions</a>,
+<a
+href="LevensteinService.html#attribute-i-number_of_substitutions">#number_of_substitutions</a>,
+<a
+href="LevensteinService.html#attribute-i-levenstein_distance">#levenstein_distance</a></p>
 </li></ul>
 </li></ul>
           
@@ -240,52 +302,60 @@ Separately store deletions, insertions and substitutions.</p>
 
           
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File app/services/levenstein_service.rb, line 24</span>
+            <pre><span class="ruby-comment"># File app/services/levenstein_service.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@target</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">nil?</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@target_string</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@source_string</span>.<span class="ruby-identifier">nil?</span>)
   
-  <span class="ruby-identifier">target_length</span> = <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">length</span>
-  <span class="ruby-identifier">source_length</span> = <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">length</span>
-  <span class="ruby-identifier">dm</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">source_length</span><span class="ruby-value">+1</span>) { <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">target_length</span><span class="ruby-value">+1</span>) {[<span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>]}} 
-  <span class="ruby-comment"># distance matrix, dimension (source_length+1)x(target_length+1)x(3)</span>
+  <span class="ruby-identifier">target_length</span> = <span class="ruby-ivar">@target_string</span>.<span class="ruby-identifier">length</span>
+  <span class="ruby-identifier">source_length</span> = <span class="ruby-ivar">@source_string</span>.<span class="ruby-identifier">length</span>
+  
+  <span class="ruby-identifier">dm</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">source_length</span><span class="ruby-value">+1</span>) { 
+    <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">target_length</span><span class="ruby-value">+1</span>) {[<span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>]}
+  } <span class="ruby-comment"># distance matrix, dimension (source_length+1)x(target_length+1)x(3)</span>
   
   <span class="ruby-comment"># initialize first row</span>
   <span class="ruby-keyword">for</span> <span class="ruby-identifier">j</span> <span class="ruby-keyword">in</span> <span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-identifier">target_length</span>
-    <span class="ruby-identifier">dm</span>[<span class="ruby-value">0</span>][<span class="ruby-identifier">j</span>][<span class="ruby-value">0</span>] = <span class="ruby-identifier">j</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@insertion_cost</span>
+    <span class="ruby-identifier">dm</span>[<span class="ruby-value">0</span>][<span class="ruby-identifier">j</span>][<span class="ruby-value">0</span>] = <span class="ruby-identifier">j</span> <span class="ruby-operator">*</span> <span class="ruby-constant">INSERTION_COST</span>
   <span class="ruby-keyword">end</span>
   
   <span class="ruby-comment"># initialize first column</span>
   <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-identifier">source_length</span>
-    <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-value">0</span>][<span class="ruby-value">1</span>] = <span class="ruby-identifier">i</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@deletion_cost</span>
+    <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-value">0</span>][<span class="ruby-value">1</span>] = <span class="ruby-identifier">i</span> <span class="ruby-operator">*</span> <span class="ruby-constant">DELETION_COST</span>
   <span class="ruby-keyword">end</span> 
   
   <span class="ruby-comment"># populate matrix</span>
   <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-identifier">source_length</span>
     <span class="ruby-keyword">for</span> <span class="ruby-identifier">j</span> <span class="ruby-keyword">in</span> <span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-identifier">target_length</span>
       <span class="ruby-comment"># critical comparison</span>
-      <span class="ruby-identifier">subCost</span> = (<span class="ruby-ivar">@target</span>[<span class="ruby-identifier">j</span><span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@source</span>[<span class="ruby-identifier">i</span><span class="ruby-value">-1</span>] <span class="ruby-operator">?</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@substitution_cost</span>)
-      <span class="ruby-identifier">x1</span> = <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span><span class="ruby-value">-1</span>][<span class="ruby-identifier">j</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">subCost</span>
-      <span class="ruby-identifier">x2</span> = <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@insertion_cost</span>
-      <span class="ruby-identifier">x3</span> = <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span><span class="ruby-value">-1</span>][<span class="ruby-identifier">j</span>].<span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@deletion_cost</span>
+      <span class="ruby-identifier">cost</span> = (<span class="ruby-ivar">@target_string</span>[<span class="ruby-identifier">j</span><span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-ivar">@source_string</span>[<span class="ruby-identifier">i</span><span class="ruby-value">-1</span>] <span class="ruby-operator">?</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span> <span class="ruby-constant">SUBSTITUTION_COST</span>)
+      <span class="ruby-identifier">x1</span> = <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span><span class="ruby-value">-1</span>][<span class="ruby-identifier">j</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">cost</span>
+      <span class="ruby-identifier">x2</span> = <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-constant">INSERTION_COST</span>
+      <span class="ruby-identifier">x3</span> = <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span><span class="ruby-value">-1</span>][<span class="ruby-identifier">j</span>].<span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-constant">DELETION_COST</span>
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">x1</span><span class="ruby-operator">&lt;=</span><span class="ruby-identifier">x2</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">x1</span><span class="ruby-operator">&lt;=</span><span class="ruby-identifier">x3</span>
         <span class="ruby-comment"># substitution</span>
         <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span>] = <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span><span class="ruby-value">-1</span>][<span class="ruby-identifier">j</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">clone</span>
-        <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span>][<span class="ruby-value">2</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">subCost</span>
+        <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span>][<span class="ruby-value">2</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">cost</span>
       <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">x2</span><span class="ruby-operator">&lt;=</span><span class="ruby-identifier">x1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">x2</span><span class="ruby-operator">&lt;=</span><span class="ruby-identifier">x3</span>
         <span class="ruby-comment"># insertion</span>
         <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span>] = <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">clone</span>
-        <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span>][<span class="ruby-value">0</span>] <span class="ruby-operator">+=</span> <span class="ruby-ivar">@insertion_cost</span>
+        <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span>][<span class="ruby-value">0</span>] <span class="ruby-operator">+=</span> <span class="ruby-constant">INSERTION_COST</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-comment"># deletion</span>
         <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span>] = <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span><span class="ruby-value">-1</span>][<span class="ruby-identifier">j</span>].<span class="ruby-identifier">clone</span>
-        <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span>][<span class="ruby-value">1</span>] <span class="ruby-operator">+=</span> <span class="ruby-ivar">@deletion_cost</span>
+        <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span>][<span class="ruby-value">1</span>] <span class="ruby-operator">+=</span> <span class="ruby-constant">DELETION_COST</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-comment"># the last value in matrix is the Levenshtein distance between the strings</span>
-  <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">source_length</span>][<span class="ruby-identifier">target_length</span>]
-  <span class="ruby-comment"># prettyPrintMatrix(dm)</span>
+  <span class="ruby-comment"># the last value in matrix is in form of an array:</span>
+  <span class="ruby-comment"># [number_of_insertions, number_of_deletions, number_of_substitutions]</span>
+  <span class="ruby-identifier">last_value</span> = <span class="ruby-identifier">dm</span>[<span class="ruby-identifier">source_length</span>][<span class="ruby-identifier">target_length</span>]
+  <span class="ruby-ivar">@number_of_insertions</span> = <span class="ruby-identifier">last_value</span>[<span class="ruby-value">0</span>]
+  <span class="ruby-ivar">@number_of_deletions</span> = <span class="ruby-identifier">last_value</span>[<span class="ruby-value">1</span>] 
+  <span class="ruby-ivar">@number_of_substitutions</span> = <span class="ruby-identifier">last_value</span>[<span class="ruby-value">2</span>]
+  <span class="ruby-ivar">@levenstein_distance</span> = <span class="ruby-identifier">last_value</span>.<span class="ruby-identifier">sum</span>
+  <span class="ruby-comment"># pretty_print_matrix(dm)</span>
+  <span class="ruby-keyword">self</span>      
 <span class="ruby-keyword">end</span></pre>
           </div>
           
