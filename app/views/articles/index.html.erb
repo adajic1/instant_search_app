@@ -2,12 +2,12 @@
 <%= form_for :article, :url => "", html: {id: :new_article_form } do |f| %>
 	<p>
 		<%= f.label :description %><br>
-		<%= f.text_field :description %>
+		<%= f.text_field :description, :size=>"50" %>
 	</p>
  
 	<p>
 		<%= f.label :content %><br>
-		<%= f.text_area :content, size: "70x5" %>
+		<%= f.text_area :content, :size=>"80x5" %>
 	</p>
  
 	<p>
