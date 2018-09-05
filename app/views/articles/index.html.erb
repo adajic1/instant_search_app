@@ -46,12 +46,13 @@
 		<br>
 	</span>
 </span>
+
 <span id="articles_list">
 	<script type="text/javascript">
 	// All of these will be inserted on $(document).ready
-	var array_of_article_ids = [];
-	var array_of_article_descriptions = [];
-	var array_of_article_contents = [];
+	array_of_article_ids = [];
+	array_of_article_descriptions = [];
+	array_of_article_contents = [];
 	<% @articles.each do |article| %>
 		array_of_article_ids.push('<%= article.id %>');
 		array_of_article_descriptions.push('<%= article.description %>');
