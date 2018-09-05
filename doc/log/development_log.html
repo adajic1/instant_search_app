@@ -10859,6 +10859,230 @@ Rendered articles/_article_template.html.erb (2.4ms)
 Rendered articles/index.html.erb within layouts/application (48.7ms)</pre>
 
 <p>Completed 200 OK in 265ms (Views: 237.0ms | ActiveRecord: 23.3ms)</p>
+
+<pre>[1m[35m (2.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6317790959152880550)[0m
+↳ /home/armin/.rbenv/versions/2.5.1/bin/rake:23
+[1m[35m (3.2ms)[0m  [1m[34mSELECT &quot;schema_migrations&quot;.&quot;version&quot; FROM &quot;schema_migrations&quot; ORDER BY &quot;schema_migrations&quot;.&quot;version&quot; ASC[0m
+↳ /home/armin/.rbenv/versions/2.5.1/bin/rake:23</pre>
+
+<p>Migrating to RenamePhraseColumn (20180905203153)</p>
+
+<pre>[1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+↳ /home/armin/.rbenv/versions/2.5.1/bin/rake:23
+[1m[35m (18.5ms)[0m  [1m[35mALTER TABLE &quot;analytics&quot; RENAME COLUMN &quot;phrase&quot; TO &quot;search_query&quot;[0m
+↳ db/migrate/20180905203153_rename_phrase_column.rb:3
+[1m[36mActiveRecord::SchemaMigration Create (1.5ms)[0m  [1m[32mINSERT INTO &quot;schema_migrations&quot; (&quot;version&quot;) VALUES ($1) RETURNING &quot;version&quot;[0m  [[&quot;version&quot;, &quot;20180905203153&quot;]]
+↳ /home/armin/.rbenv/versions/2.5.1/bin/rake:23
+[1m[35m (12.4ms)[0m  [1m[35mCOMMIT[0m
+↳ /home/armin/.rbenv/versions/2.5.1/bin/rake:23
+[1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT  &quot;ar_internal_metadata&quot;.* FROM &quot;ar_internal_metadata&quot; WHERE &quot;ar_internal_metadata&quot;.&quot;key&quot; = $1 LIMIT $2[0m  [[&quot;key&quot;, &quot;environment&quot;], [&quot;LIMIT&quot;, 1]]
+↳ /home/armin/.rbenv/versions/2.5.1/bin/rake:23
+[1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+↳ /home/armin/.rbenv/versions/2.5.1/bin/rake:23
+[1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+↳ /home/armin/.rbenv/versions/2.5.1/bin/rake:23
+[1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6317790959152880550)[0m
+↳ /home/armin/.rbenv/versions/2.5.1/bin/rake:23
+[1m[35m (0.2ms)[0m  [1m[34mSELECT &quot;schema_migrations&quot;.&quot;version&quot; FROM &quot;schema_migrations&quot; ORDER BY &quot;schema_migrations&quot;.&quot;version&quot; ASC[0m
+↳ /home/armin/.rbenv/versions/2.5.1/bin/rake:23</pre>
+
+<p>Started GET “/analytics/index” for 127.0.0.1 at 2018-09-05 22:35:09 +0200</p>
+
+<pre>[1m[35m (19.7ms)[0m  [1m[34mSELECT &quot;schema_migrations&quot;.&quot;version&quot; FROM &quot;schema_migrations&quot; ORDER BY &quot;schema_migrations&quot;.&quot;version&quot; ASC[0m
+↳ /home/armin/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98</pre>
+
+<p>Processing by <a
+href="../AnalyticsController.html#method-i-index">AnalyticsController#index</a>
+as HTML</p>
+
+<pre>Rendering analytics/index.html.erb within layouts/application
+[1m[35m (13.0ms)[0m  [1m[34mSELECT COUNT(*) FROM &quot;analytics&quot;[0m
+↳ app/views/analytics/index.html.erb:3
+[1m[36mAnalytic Load (0.6ms)[0m  [1m[34mSELECT &quot;analytics&quot;.* FROM &quot;analytics&quot; ORDER BY &quot;analytics&quot;.&quot;counter&quot; DESC[0m
+↳ app/views/analytics/index.html.erb:13
+Rendered analytics/index.html.erb within layouts/application (189.5ms)</pre>
+
+<p>Completed 200 OK in 834ms (Views: 686.5ms | ActiveRecord: 77.1ms)</p>
+
+<p>Started POST “/instant_search/create” for 127.0.0.1 at 2018-09-05 22:35:25
++0200 Processing by <a
+href="../InstantSearchController.html#method-i-create">InstantSearchController#create</a>
+as <strong>/</strong></p>
+
+<pre>Parameters: {&quot;body&quot;=&gt;&quot;t&quot;, &quot;authenticity_token&quot;=&gt;&quot;tn2T0MNL3yME13OfKVdanruQt9zz5HUpaQkudVToHNY4FtT1xtARKnN3SwvCEnLvkSFjZylA9TCGRMuMC1NSbQ==&quot;}
+[1m[36mSession Load (9.6ms)[0m  [1m[34mSELECT  &quot;sessions&quot;.* FROM &quot;sessions&quot; WHERE &quot;sessions&quot;.&quot;body&quot; = $1 LIMIT $2[0m  [[&quot;body&quot;, &quot;127.0.0.1&quot;], [&quot;LIMIT&quot;, 1]]
+↳ app/models/session.rb:8
+[1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+↳ app/services/incoming_search_query_service.rb:12
+[1m[36mSession Update (11.0ms)[0m  [1m[33mUPDATE &quot;sessions&quot; SET &quot;lastpartial&quot; = $1, &quot;updated_at&quot; = $2 WHERE &quot;sessions&quot;.&quot;id&quot; = $3[0m  [[&quot;lastpartial&quot;, &quot;t&quot;], [&quot;updated_at&quot;, &quot;2018-09-05 20:35:25.311510&quot;], [&quot;id&quot;, 3]]
+↳ app/services/incoming_search_query_service.rb:12
+[1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+↳ app/services/incoming_search_query_service.rb:12
+[1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+↳ app/services/incoming_search_query_service.rb:14
+[1m[36mSearchQuery Create (2.7ms)[0m  [1m[32mINSERT INTO &quot;search_queries&quot; (&quot;body&quot;, &quot;session_id&quot;, &quot;created_at&quot;, &quot;updated_at&quot;) VALUES ($1, $2, $3, $4) RETURNING &quot;id&quot;[0m  [[&quot;body&quot;, &quot;t&quot;], [&quot;session_id&quot;, 3], [&quot;created_at&quot;, &quot;2018-09-05 20:35:25.403845&quot;], [&quot;updated_at&quot;, &quot;2018-09-05 20:35:25.403845&quot;]]
+↳ app/services/incoming_search_query_service.rb:14
+[1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+↳ app/services/incoming_search_query_service.rb:14
+[1m[36mAnalytic Load (0.2ms)[0m  [1m[34mSELECT  &quot;analytics&quot;.* FROM &quot;analytics&quot; WHERE &quot;analytics&quot;.&quot;search_query&quot; = $1 LIMIT $2[0m  [[&quot;search_query&quot;, &quot;t&quot;], [&quot;LIMIT&quot;, 1]]
+↳ app/models/analytic.rb:21
+[1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+↳ app/models/analytic.rb:25
+[1m[36mAnalytic Create (6.0ms)[0m  [1m[32mINSERT INTO &quot;analytics&quot; (&quot;search_query&quot;, &quot;counter&quot;, &quot;created_at&quot;, &quot;updated_at&quot;) VALUES ($1, $2, $3, $4) RETURNING &quot;id&quot;[0m  [[&quot;search_query&quot;, &quot;t&quot;], [&quot;counter&quot;, 1], [&quot;created_at&quot;, &quot;2018-09-05 20:35:25.428849&quot;], [&quot;updated_at&quot;, &quot;2018-09-05 20:35:25.428849&quot;]]
+↳ app/models/analytic.rb:25
+[1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+↳ app/models/analytic.rb:25
+Rendering text template
+Rendered text template (0.0ms)</pre>
+
+<p>Sent data  (2.0ms) Completed 200 OK in 227ms (Views: 1.5ms | ActiveRecord:
+38.4ms)</p>
+
+<p>Started POST “/instant_search/create” for 127.0.0.1 at 2018-09-05 22:35:25
++0200 Processing by <a
+href="../InstantSearchController.html#method-i-create">InstantSearchController#create</a>
+as <strong>/</strong></p>
+
+<pre>Parameters: {&quot;body&quot;=&gt;&quot;test&quot;, &quot;authenticity_token&quot;=&gt;&quot;tn2T0MNL3yME13OfKVdanruQt9zz5HUpaQkudVToHNY4FtT1xtARKnN3SwvCEnLvkSFjZylA9TCGRMuMC1NSbQ==&quot;}
+[1m[36mSession Load (0.3ms)[0m  [1m[34mSELECT  &quot;sessions&quot;.* FROM &quot;sessions&quot; WHERE &quot;sessions&quot;.&quot;body&quot; = $1 LIMIT $2[0m  [[&quot;body&quot;, &quot;127.0.0.1&quot;], [&quot;LIMIT&quot;, 1]]
+↳ app/models/session.rb:8
+[1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+↳ app/services/incoming_search_query_service.rb:12
+[1m[36mSession Update (0.2ms)[0m  [1m[33mUPDATE &quot;sessions&quot; SET &quot;lastpartial&quot; = $1, &quot;updated_at&quot; = $2 WHERE &quot;sessions&quot;.&quot;id&quot; = $3[0m  [[&quot;lastpartial&quot;, &quot;test&quot;], [&quot;updated_at&quot;, &quot;2018-09-05 20:35:25.835852&quot;], [&quot;id&quot;, 3]]
+↳ app/services/incoming_search_query_service.rb:12
+[1m[35m (6.7ms)[0m  [1m[35mCOMMIT[0m
+↳ app/services/incoming_search_query_service.rb:12
+[1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+↳ app/services/incoming_search_query_service.rb:14
+[1m[36mSearchQuery Create (0.4ms)[0m  [1m[32mINSERT INTO &quot;search_queries&quot; (&quot;body&quot;, &quot;session_id&quot;, &quot;created_at&quot;, &quot;updated_at&quot;) VALUES ($1, $2, $3, $4) RETURNING &quot;id&quot;[0m  [[&quot;body&quot;, &quot;test&quot;], [&quot;session_id&quot;, 3], [&quot;created_at&quot;, &quot;2018-09-05 20:35:25.850544&quot;], [&quot;updated_at&quot;, &quot;2018-09-05 20:35:25.850544&quot;]]
+↳ app/services/incoming_search_query_service.rb:14
+[1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+↳ app/services/incoming_search_query_service.rb:14
+[1m[36mAnalytic Load (0.6ms)[0m  [1m[34mSELECT  &quot;analytics&quot;.* FROM &quot;analytics&quot; WHERE &quot;analytics&quot;.&quot;search_query&quot; = $1 LIMIT $2[0m  [[&quot;search_query&quot;, &quot;t&quot;], [&quot;LIMIT&quot;, 1]]
+↳ app/models/analytic.rb:21
+[1m[35m (1.5ms)[0m  [1m[35mBEGIN[0m
+↳ app/models/analytic.rb:32
+[1m[36mAnalytic Destroy (0.3ms)[0m  [1m[31mDELETE FROM &quot;analytics&quot; WHERE &quot;analytics&quot;.&quot;id&quot; = $1[0m  [[&quot;id&quot;, 80]]
+↳ app/models/analytic.rb:32
+[1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+↳ app/models/analytic.rb:32
+[1m[36mAnalytic Load (0.2ms)[0m  [1m[34mSELECT  &quot;analytics&quot;.* FROM &quot;analytics&quot; WHERE &quot;analytics&quot;.&quot;search_query&quot; = $1 LIMIT $2[0m  [[&quot;search_query&quot;, &quot;test&quot;], [&quot;LIMIT&quot;, 1]]
+↳ app/models/analytic.rb:21
+[1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+↳ app/models/analytic.rb:25
+[1m[36mAnalytic Create (0.3ms)[0m  [1m[32mINSERT INTO &quot;analytics&quot; (&quot;search_query&quot;, &quot;counter&quot;, &quot;created_at&quot;, &quot;updated_at&quot;) VALUES ($1, $2, $3, $4) RETURNING &quot;id&quot;[0m  [[&quot;search_query&quot;, &quot;test&quot;], [&quot;counter&quot;, 1], [&quot;created_at&quot;, &quot;2018-09-05 20:35:25.868468&quot;], [&quot;updated_at&quot;, &quot;2018-09-05 20:35:25.868468&quot;]]
+↳ app/models/analytic.rb:25
+[1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+↳ app/models/analytic.rb:25
+Rendering text template
+Rendered text template (0.0ms)</pre>
+
+<p>Sent data  (0.5ms) Completed 200 OK in 38ms (Views: 0.4ms | ActiveRecord:
+13.2ms)</p>
+
+<p>Started GET “/analytics/index” for 127.0.0.1 at 2018-09-05 22:35:27 +0200
+Processing by <a
+href="../AnalyticsController.html#method-i-index">AnalyticsController#index</a>
+as HTML</p>
+
+<pre>Rendering analytics/index.html.erb within layouts/application
+[1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM &quot;analytics&quot;[0m
+↳ app/views/analytics/index.html.erb:3
+[1m[36mAnalytic Load (0.2ms)[0m  [1m[34mSELECT &quot;analytics&quot;.* FROM &quot;analytics&quot; ORDER BY &quot;analytics&quot;.&quot;counter&quot; DESC[0m
+↳ app/views/analytics/index.html.erb:13
+Rendered analytics/index.html.erb within layouts/application (5.9ms)</pre>
+
+<p>Completed 200 OK in 89ms (Views: 86.6ms | ActiveRecord: 0.6ms)</p>
+
+<p>Started GET “/” for 127.0.0.1 at 2018-09-05 22:35:30 +0200 Processing by <a
+href="../InstantSearchController.html#method-i-index">InstantSearchController#index</a>
+as HTML</p>
+
+<pre>Rendering instant_search/index.html.erb within layouts/application
+Rendered instant_search/index.html.erb within layouts/application (0.3ms)</pre>
+
+<p>Completed 200 OK in 339ms (Views: 337.2ms | ActiveRecord: 0.0ms)</p>
+
+<p>Started GET “/analytics/index” for 127.0.0.1 at 2018-09-05 22:35:33 +0200
+Processing by <a
+href="../AnalyticsController.html#method-i-index">AnalyticsController#index</a>
+as HTML</p>
+
+<pre>Rendering analytics/index.html.erb within layouts/application
+[1m[35m (1.8ms)[0m  [1m[34mSELECT COUNT(*) FROM &quot;analytics&quot;[0m
+↳ app/views/analytics/index.html.erb:3
+[1m[36mAnalytic Load (0.4ms)[0m  [1m[34mSELECT &quot;analytics&quot;.* FROM &quot;analytics&quot; ORDER BY &quot;analytics&quot;.&quot;counter&quot; DESC[0m
+↳ app/views/analytics/index.html.erb:13
+Rendered analytics/index.html.erb within layouts/application (12.8ms)</pre>
+
+<p>Completed 200 OK in 75ms (Views: 70.0ms | ActiveRecord: 2.2ms)</p>
+
+<p>Started POST “/instant_search/create” for 127.0.0.1 at 2018-09-05 22:35:35
++0200 Processing by <a
+href="../InstantSearchController.html#method-i-create">InstantSearchController#create</a>
+as <strong>/</strong></p>
+
+<pre>Parameters: {&quot;body&quot;=&gt;&quot;&quot;, &quot;authenticity_token&quot;=&gt;&quot;P2hlM3mOgm3czL7nCqQmWLZltRsLZVQY9g2rMT5t14WxAyIWfBVMZKtshnPh4Q4pnNRhoNHB1AEZQE7IYdaZPg==&quot;}
+[1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT  &quot;sessions&quot;.* FROM &quot;sessions&quot; WHERE &quot;sessions&quot;.&quot;body&quot; = $1 LIMIT $2[0m  [[&quot;body&quot;, &quot;127.0.0.1&quot;], [&quot;LIMIT&quot;, 1]]
+↳ app/models/session.rb:8
+[1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+↳ app/services/incoming_search_query_service.rb:12
+[1m[36mSession Update (0.4ms)[0m  [1m[33mUPDATE &quot;sessions&quot; SET &quot;lastpartial&quot; = $1, &quot;updated_at&quot; = $2 WHERE &quot;sessions&quot;.&quot;id&quot; = $3[0m  [[&quot;lastpartial&quot;, &quot;&quot;], [&quot;updated_at&quot;, &quot;2018-09-05 20:35:35.150092&quot;], [&quot;id&quot;, 3]]
+↳ app/services/incoming_search_query_service.rb:12
+[1m[35m (5.2ms)[0m  [1m[35mCOMMIT[0m
+↳ app/services/incoming_search_query_service.rb:12
+Rendering text template
+Rendered text template (0.0ms)</pre>
+
+<p>Sent data  (0.6ms) Completed 200 OK in 12ms (Views: 0.4ms | ActiveRecord:
+5.9ms)</p>
+
+<p>Started DELETE “/analytics/destroy_record” for 127.0.0.1 at 2018-09-05
+22:35:36 +0200 Processing by <a
+href="../AnalyticsController.html#method-i-destroy_record">AnalyticsController#destroy_record</a>
+as <strong>/</strong></p>
+
+<pre>Parameters: {&quot;authenticity_token&quot;=&gt;&quot;DVICg4ZQEj/woFZG1V9tSsWi+9PPAFP0sFR81+AW9XqDOUWmg8vcNocAbtI+GkU77xMvaBWk0+1fGZkuv627wQ==&quot;, &quot;id&quot;=&gt;&quot;81&quot;}
+[1m[36mAnalytic Load (0.2ms)[0m  [1m[34mSELECT  &quot;analytics&quot;.* FROM &quot;analytics&quot; WHERE &quot;analytics&quot;.&quot;id&quot; = $1 LIMIT $2[0m  [[&quot;id&quot;, 81], [&quot;LIMIT&quot;, 1]]
+↳ app/controllers/analytics_controller.rb:16
+[1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+↳ app/controllers/analytics_controller.rb:16
+[1m[36mAnalytic Destroy (1.7ms)[0m  [1m[31mDELETE FROM &quot;analytics&quot; WHERE &quot;analytics&quot;.&quot;id&quot; = $1[0m  [[&quot;id&quot;, 81]]
+↳ app/controllers/analytics_controller.rb:16
+[1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+↳ app/controllers/analytics_controller.rb:16
+Rendering text template
+Rendered text template (0.0ms)</pre>
+
+<p>Sent data  (0.5ms) Completed 200 OK in 8ms (Views: 0.4ms | ActiveRecord:
+2.8ms)</p>
+
+<p>Started GET “/analytics/index” for 127.0.0.1 at 2018-09-05 22:35:38 +0200
+Processing by <a
+href="../AnalyticsController.html#method-i-index">AnalyticsController#index</a>
+as HTML</p>
+
+<pre>Rendering analytics/index.html.erb within layouts/application
+[1m[35m (2.6ms)[0m  [1m[34mSELECT COUNT(*) FROM &quot;analytics&quot;[0m
+↳ app/views/analytics/index.html.erb:3
+[1m[36mAnalytic Load (0.4ms)[0m  [1m[34mSELECT &quot;analytics&quot;.* FROM &quot;analytics&quot; ORDER BY &quot;analytics&quot;.&quot;counter&quot; DESC[0m
+↳ app/views/analytics/index.html.erb:13
+Rendered analytics/index.html.erb within layouts/application (4.7ms)</pre>
+
+<p>Completed 200 OK in 51ms (Views: 47.1ms | ActiveRecord: 3.0ms)</p>
+
+<p>Started GET “/articles/index” for 127.0.0.1 at 2018-09-05 22:35:43 +0200
+Processing by <a
+href="../ArticlesController.html#method-i-index">ArticlesController#index</a>
+as HTML</p>
+
+<pre>Rendering articles/index.html.erb within layouts/application
+Rendered articles/_article_template.html.erb (0.3ms)
+[1m[36mArticle Load (1.0ms)[0m  [1m[34mSELECT &quot;articles&quot;.* FROM &quot;articles&quot; ORDER BY &quot;articles&quot;.&quot;id&quot; ASC[0m
+↳ app/views/articles/index.html.erb:28
+Rendered articles/index.html.erb within layouts/application (27.3ms)</pre>
+
+<p>Completed 200 OK in 103ms (Views: 93.0ms | ActiveRecord: 8.0ms)</p>
 </main>
 
 
