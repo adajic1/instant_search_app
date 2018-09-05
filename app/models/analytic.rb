@@ -17,7 +17,7 @@ class Analytic < ApplicationRecord
   # Increase or decrease counter for the given 'string' by 'number' value.
   # If counter becomes <=0, destroys record. If string is new, creates new record.
   def self.counter_update_for(string, number) 
-    return 0 if string.blank? # do nothing for whitespaces or blank strings
+    return 0 if string.blank?
     analytic_row = find_by_search_query(string)            
     if !analytic_row.nil? # string already exists in the database    
       update_or_destroy_existing_counter(analytic_row, number)    
