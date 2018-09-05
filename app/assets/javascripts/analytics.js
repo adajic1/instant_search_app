@@ -15,12 +15,12 @@ $(document).ready(function() {
     });  
   });
   
-  $(document).on('click', '[id^="destroy_"]', function() {
-  	// id attribute is expected to be of the following format: destroy_xx
+  $(document).on('click', '[id^="analytics_destroy_"]', function() {
+  	// id attribute is expected to be of the following format: analytics_destroy_<id>
     var words = $(this).attr("id").split("_");
     var id = words[words.length - 1];
-    $('#row_'+id).remove();
-    if ($('[id^="destroy_"]').length==0) 
+    $('#analytics_row_'+id).remove();
+    if ($('[id^="analytics_destroy_"]').length==0) 
     	$('#analyticsContent').html("All data cleared...");
 
     $.ajax({

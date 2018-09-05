@@ -11,12 +11,12 @@
 				<th width="1px"><b></b></th>
 			</tr>
 			<% @analytics.each do |data| %>
-			<tr id="row_<%= data.id %>">
+			<tr id="analytics_row_<%= data.id %>">
 			    <td><%= data.phrase %></td>
 			    <td><%= data.counter %></td>
 			    <td>
 			    	<font color="blue">
-			    		<span id="destroy_<%= data.id %>">delete</span>
+			    		<span id="analytics_destroy_<%= data.id %>">delete</span>
 			    	</font>
 			    </td>
 			</tr>
