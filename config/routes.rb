@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete 'analytics/destroy_record', to: 'analytics#destroy_record' 
   get 'articles/index', to: 'articles#index'
   post 'articles/create', to: 'articles#create'
-  delete 'articles/destroy_article', to: 'articles#destroy_article'
+  delete 'articles/destroy', to: 'articles#destroy'
+  delete 'articles/destroy_article', to: 'articles#destroy_article'  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

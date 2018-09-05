@@ -1,47 +1,47 @@
 <h1>Articles</h1>
 <%= form_for :article, :url => "", html: {id: :new_article_form } do |f| %>
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </p>
+	<p>
+		<%= f.label :description %><br>
+		<%= f.text_field :description %>
+	</p>
  
-  <p>
-    <%= f.label :content %><br>
-    <%= f.text_area :content, size: "70x5" %>
-  </p>
+	<p>
+		<%= f.label :content %><br>
+		<%= f.text_area :content, size: "70x5" %>
+	</p>
  
-  <p>
-    <%= f.submit :id => 'save_article', :type => 'button', :value => "Add new article" %>
-    <input type="button" id="clear_form_button" value="Clear fields">
-    <input type="button" id="clear_all_articles" value="Clear all articles">
-  </p>
+	<p>
+		<%= f.submit :id => 'save_article', :type => 'button', :value => "Add new article" %>
+		<input type="button" id="clear_form_button" value="Clear fields">
+		<input type="button" id="clear_all_articles" value="Clear all articles">
+	</p>
 <% end %>
 
 <span id="article_template">
 	<span id="article_span_<ID>">
 		<table class="blue_table" id="article_<ID>">
-		<thead>
-			<tr>
-				<th id="article_description_<ID>">
-					DESCRIPTION PLACEHOLDER
-				</th>
-				<th class="article_id">
-					id: <span id="article_id_<ID>"><ID></span>
-				</th>
-				<th class="article_delete">
-					<font style="color: #00FFFF;">
-						<span id="article_destroy_<ID>">delete</span>
-					</font>
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td colspan="3" id="article_content_<ID>">
-					CONTENT PLACEHOLDER
-				</td>
-			</tr>
-		</tbody>
+			<thead>
+				<tr>
+					<th id="article_description_<ID>">
+						DESCRIPTION PLACEHOLDER
+					</th>
+					<th class="article_id">
+						id: <span id="article_id_<ID>"><ID></span>
+					</th>
+					<th class="article_delete">
+						<font style="color: #00FFFF;">
+							<span id="article_destroy_<ID>">delete</span>
+						</font>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="3" id="article_content_<ID>">
+						CONTENT PLACEHOLDER
+					</td>
+				</tr>
+			</tbody>
 		</table>
 		<br>
 	</span>
@@ -53,9 +53,9 @@
 	var array_of_article_descriptions = [];
 	var array_of_article_contents = [];
 	<% @articles.each do |article| %>
-	    array_of_article_ids.push('<%= article.id %>');
-	    array_of_article_descriptions.push('<%= article.description %>');
-	    array_of_article_contents.push('<%= article.content %>');
+		array_of_article_ids.push('<%= article.id %>');
+		array_of_article_descriptions.push('<%= article.description %>');
+		array_of_article_contents.push('<%= article.content %>');
 	<% end %>
 	</script>
 </span>
