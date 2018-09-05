@@ -1,38 +1,46 @@
 // Place all the styles related to the articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-table.blueTable {
+table.blue_table {
   border: 1px solid #1C6EA4;
   background-color: #EEEEEE;
   width: 80%;
   text-align: left;
   border-collapse: collapse;
 }
-table.blueTable td, table.blueTable th {
+table.blue_table td, table.blue_table th {
   border: 1px solid #AAAAAA;
-  padding: 2px 5px;
+  padding: 2px 8px;
 }
-table.blueTable td p, table.blueTable th p {
+table.blue_table td p, table.blue_table th p {
   display: inline;
 }
-table.blueTable tbody td {
+table.blue_table tbody td {
   font-size: 13px;
 }
-table.blueTable tr:nth-child(even) {
+table.blue_table tr:nth-child(even) {
   background: #D0E4F5;
 }
-table.blueTable thead {
+table.blue_table thead {
   background: #1C6EA4;
   background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
   background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
   background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
 }
-table.blueTable thead th {
+table.blue_table thead th {
   font-size: 15px;
   font-weight: bold;
   color: #FFFFFF;  
 }
+
 .article_id, .article_delete {
   white-space: nowrap;
   width: 1px;
 }  
+#article_template {
+  display: none;
+}  
+
+[id^="article_destroy_"] {
+    cursor: pointer;
+}

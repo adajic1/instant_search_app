@@ -1,44 +1,39 @@
 class String
 
   # Calculate Levenstein distance between strings with given weighted costs
-  # * *Args*    :
-  #   - +other+ -> the string against which we calculate Levenstein distance
-  #   - +ins+ -> cost value of char insertion
-  #   - +del+ -> cost value of char deletion
-  #   - +sub+ -> cost value of char substitution
   # * *Returns* :
   #   - Levenstein distance
-  def levenshtein(other, ins=1, del=1, sub=1)
-    # ins, del, sub are weighted costs
-    return nil if (self.nil? || other.nil?)
+  def levenshtein(other_string, insertion_cost=1, deletion_cost=1, substitution_cost=1)
+    return nil if (self.nil? || other_string.nil?)
     
-    t_len = self.length # target length
-    s_len = other.length # source length    
-    dm = Array.new(s_len+1) { Array.new(t_len+1) {0} } # distance matrix, dimension (s_len+1)x(t_len+1)
+    target_length = self.length
+    source_length = other_string.length   
+    dm = Array.new(source_length+1) { Array.new(target_length+1) {0} } 
+    # distance matrix, dimension (source_length+1)x(target_length+1)
     
     # initialize first row   
-    for j in 1..t_len
-      dm[0][j] = j * ins
+    for j in 1..target_length
+      dm[0][j] = j * insertion_cost
     end
     
     # initialize first column
-    for i in 1..s_len
-      dm[i][0] = i * del
+    for i in 1..source_length
+      dm[i][0] = i * deletion_cost
     end 
     
     # populate matrix
-    for i in 1..s_len
-      for j in 1..t_len
+    for i in 1..source_length
+      for j in 1..target_length
         # critical comparison
-        x1 = dm[i-1][j-1] + (self[j-1] == other[i-1] ? 0 : sub)
-        x2 = dm[i][j-1] + ins
-        x3 = dm[i-1][j] + del
+        x1 = dm[i-1][j-1] + (self[j-1] == other_string[i-1] ? 0 : substitution_cost)
+        x2 = dm[i][j-1] + insertion_cost
+        x3 = dm[i-1][j] + deletion_cost
         dm[i][j] = [x1, x2, x3].min
       end
     end
 
     # the last value in matrix is the Levenshtein distance between the strings
-    dm[s_len][t_len]
+    dm[source_length][target_length]
   end
   
 end

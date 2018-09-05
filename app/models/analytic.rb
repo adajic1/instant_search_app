@@ -3,13 +3,12 @@ class Analytic < ApplicationRecord
   # Update analytics of new_query_string and old_query_string
   def self.compare_and_update(new_query_string, old_query_string) 
     return nil if new_query_string.blank?
-    levenstein_array = LevensteinService.call(new_query_string, old_query_string)
-    number_of_insertions, number_of_deletions, number_of_substitutions = levenstein_array
-    if number_of_substitutions > 0 # It's a new phrase                
-      Analytic.count(new_query_string, 1)
-    elsif number_of_insertions > 0 # It's an update of the previous phrase        
-      Analytic.count(old_query_string, -1)
-      Analytic.count(new_query_string, 1)
+    levenstein_object = LevensteinService.call(new_query_string, old_query_string)
+    if levenstein_object.number_of_substitutions > 0 # It's a new phrase                
+      Analytic.counter_update_for(new_query_string, 1)
+    elsif levenstein_object.number_of_insertions > 0 # It's an update of the previous phrase        
+      Analytic.counter_update_for(old_query_string, -1)
+      Analytic.counter_update_for(new_query_string, 1)
     end       
   end  
   
@@ -17,7 +16,7 @@ class Analytic < ApplicationRecord
   
   # Increase or decrease counter for the given 'string' by 'number' value.
   # If counter becomes <=0, destroys record. If string is new, creates new record.
-  def self.count(string, number) 
+  def self.counter_update_for(string, number) 
     return 0 if string.blank? # do nothing for whitespaces or blank strings
     analytic_row = find_by_phrase(string)            
     if !analytic_row.nil? # string already exists in the database    

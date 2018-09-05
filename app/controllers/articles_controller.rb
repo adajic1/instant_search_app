@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   def index
+    @articles=Article.order(id: :ASC)
     # render template: "articles/index" # not needed because ruby renders it by default
   end
   
@@ -8,9 +9,14 @@ class ArticlesController < ApplicationController
     if (!@params_valid) 
       send_data "ERROR: Invalid parameters"
     else 
-      Article.create(article_params)
-      send_data "OK"
+      new_article = Article.create(article_params)
+      send_data new_article.id
     end
+  end
+  
+  def destroy_article
+    Article.destroy(params[:id])
+    send_data params[:id] 
   end
   
   private

@@ -1,16 +1,16 @@
 $(document).ready(function() {
 	
-  $('#clearAnalyticsTable').click(function (e) {
+  $('#clear_analytics_table').click(function (e) {
     $.ajax({
         method: 'DELETE',
         url: "destroy",   
         data: { authenticity_token: $('[name="csrf-token"]')[0].content},     
         async: true,
         success: function(result) {
-          $('#analyticsContent').html(result);
+          $('#analytics_content').html(result);
         },
         error: function(result) {
-          $('#analyticsContent').html("<b>Error:</b> "+result);
+          $('#analytics_content').html("<b>Error:</b> "+JSON.stringify(result));
         }
     });  
   });
@@ -21,8 +21,7 @@ $(document).ready(function() {
     var id = words[words.length - 1];
     $('#analytics_row_'+id).remove();
     if ($('[id^="analytics_destroy_"]').length==0) 
-    	$('#analyticsContent').html("All data cleared...");
-
+    	$('#analytics_content').html("All data cleared...");
     $.ajax({
         method: 'DELETE',
         url: "destroy_record",   
@@ -32,9 +31,9 @@ $(document).ready(function() {
           // alert(result);
         },
         error: function(result) {
-          $('#analyticsContent').html("<b>Error:</b> "+result);
+          $('#analytics_content').html("<b>Error:</b> "+JSON.stringify(result));
         }
-    });  
-
+    }); 
   });
+  
 });

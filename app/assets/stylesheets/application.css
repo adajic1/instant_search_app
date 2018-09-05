@@ -15,3 +15,7 @@
  *= require_tree ../../../vendor/assets/stylesheets/.
  *= require_tree ../../../lib/assets/stylesheets/.
  */
+
+input[type=button] {
+  cursor: pointer;
+}
