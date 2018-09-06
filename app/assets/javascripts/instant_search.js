@@ -11,7 +11,15 @@ $(document).ready(function() {
 		if (instant_search_on) startInstantSearch();
 		else stopInstantSearch();
 	}  
-  
+    
+    function getShortenedContent(content) {
+    	var num_chars = 50;
+    	if (content.length<=num_chars) 
+    		return content;
+    	else 
+    		return content.substring(0,50)+"...";
+    }
+    
 	function submitIfNeeded() {
 	    new_value = $('#searchbox').val();
 	    if (old_value===0 || new_value!=old_value) {
@@ -33,7 +41,8 @@ $(document).ready(function() {
 					for (i = 0; i < response_object.articles.length; i++) {
 						var id = response_object.articles[i].id;
 						var description = response_object.articles[i].description;
-						var shortened_content = "...";
+						
+						var shortened_content = getShortenedContent(response_object.articles[i].content);
 						var full_content = response_object.articles[i].content;
 						articleTemplateInsert("#articles_list", id, description, shortened_content);
 						$('#article_full_content_'+id).html(full_content);
