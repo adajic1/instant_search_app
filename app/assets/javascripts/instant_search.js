@@ -13,7 +13,7 @@ $(document).ready(function() {
 	}  
     
     function getShortenedContent(content) {
-    	var num_chars = 150;
+    	var num_chars = 100;
     	if (content.length<=num_chars) 
     		return content;
     	else 
