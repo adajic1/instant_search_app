@@ -1,7 +1,7 @@
 class Analytic < ApplicationRecord
    
   # Update analytics of new_query_string and old_query_string, and last user action of session
-  def self.compare_and_update(new_query_string, old_query_string, session) 
+  def self.handle_counter_and_user_action(session, old_query_string, new_query_string) 
     return nil if new_query_string.blank?
     levenstein_object = LevensteinService.call(new_query_string, old_query_string)
     if levenstein_object.number_of_substitutions > 0 # It's a new search query 
