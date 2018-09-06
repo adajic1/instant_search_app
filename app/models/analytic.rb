@@ -25,8 +25,7 @@ class Analytic < ApplicationRecord
     if !session.last_user_action_is_search? || session.user_actions.last.description != old_query_string
       # It's a new query
       session.user_actions.create(action_type: UserAction::TYPE_SEARCH, description: new_query_string)
-    else
-      # It's an update of previous search query
+    else # It's an update of the previous search query      
       counter_update_for(old_query_string, -1) 
       session.user_actions.last.update(action_type: UserAction::TYPE_SEARCH, description: new_query_string)
     end 
