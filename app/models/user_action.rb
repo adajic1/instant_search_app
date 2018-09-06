@@ -8,7 +8,7 @@ class UserAction < ApplicationRecord
   TYPE_CLOSE_TAB = "closed tab"
   TYPE_SUPPORT = "contacted support" 
   
-  # Register last user action of session
+  # Register last user action of session, TYPE_SEARCH
   def self.register_type_search(session, old_query_string, new_query_string) 
     return nil if new_query_string.blank?
     query_type = SearchQuery.get_type_of_search_query(session, old_query_string, new_query_string)
