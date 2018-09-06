@@ -5,7 +5,7 @@ class Session < ApplicationRecord
   # CONSTANTS
   SESSION_MINUTES = 5 # In minutes
   
-  # Get Session instance with given :body -> ip_string. If it doesn't exist, it will be created.
+  # Get active Session instance with given :body -> ip_string. If it doesn't exist, it will be created.
   # * *Returns* :
   #   - Session object
   def self.get_or_create(ip_string) 
@@ -24,6 +24,8 @@ class Session < ApplicationRecord
     return false if user_actions.last==nil || user_actions.last.action_type != UserAction::TYPE_CLOSE_TAB
     return true    
   end 
+  
+  private
   
   def self.get_first_unclosed_session(sessions)
     for i in 0..sessions.length-1
