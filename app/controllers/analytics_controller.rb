@@ -1,6 +1,6 @@
 class AnalyticsController < ApplicationController
   def index
-    @analytics=Analytic.order(counter: :DESC)
+    @analytics = Analytic.order(counter: :DESC)
     # render template: "analytics/index" # not needed because ruby renders it by default
   end
   

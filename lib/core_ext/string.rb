@@ -3,7 +3,7 @@ class String
   # Calculate Levenstein distance between strings with given weighted costs
   # * *Returns* :
   #   - Levenstein distance
-  def levenshtein(other_string, insertion_cost=1, deletion_cost=1, substitution_cost=1)
+  def levenstein(other_string, insertion_cost=1, deletion_cost=1, substitution_cost=1)
     return nil if (self.nil? || other_string.nil?)
     
     target_length = self.length
@@ -32,7 +32,7 @@ class String
       end
     end
 
-    # the last value in matrix is the Levenshtein distance between the strings
+    # the last value in matrix is the Levenstein distance between the strings
     dm[source_length][target_length]
   end
   

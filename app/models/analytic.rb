@@ -12,6 +12,11 @@ class Analytic < ApplicationRecord
     end       
   end  
   
+  def self.get_ordered_arrays_of_similar_queries
+    array_of_analytics = Analytic.all.to_a
+    puts array_of_analytic_records.inspect
+  end
+  
   private
   
   # Increase or decrease counter for the given 'string' by 'number' value.
