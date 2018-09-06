@@ -70,3 +70,7 @@
 .instant_search_title {
   font-size: 20px;
 }
+
+[id^="instant_search_article_span_"] {
+  cursor: pointer;
+}

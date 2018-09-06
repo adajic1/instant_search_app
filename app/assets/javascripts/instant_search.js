@@ -37,10 +37,6 @@ $(document).ready(function() {
 											  response_object.articles[i].description, 
 											  response_object.articles[i].content);
 					}
-					articleTemplateInsert("#article", 
-										  response_object.articles[0].id, 
-									 	  response_object.articles[0].description, 
-									      response_object.articles[0].content);
 		        },
 		        error: function(result) {
 					if (result.length==0) result="-empty-";
@@ -94,5 +90,15 @@ $(document).ready(function() {
 	});
 
 	$(document).on('page:load', $('#searchbox').val(''));
+	
+	$(document).on('click', '[id^="instant_search_article_span_"]', function() {
+		// id attribute is expected to be of the following format: article_span_<id>
+    	var words = $(this).attr("id").split("_");
+		var id = words[words.length - 1];
+		var description = $('#article_description_'+id).html();
+		var content = $('#article_content_'+id).html();
+		$('#article').html("");
+		articleTemplateInsert("#article", id, description, content);
+	});
 	
 });
