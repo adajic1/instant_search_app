@@ -9,7 +9,7 @@ class IncomingSearchQueryService
   def call
     session = Session.get_or_create(@request_ip) 
     # Consider this as a new query if last user action is not a search
-    @old_query = (session.last_user_action_is_search?)? session.lastpartial : ""
+    @old_query = session.lastpartial
     session.update_attribute(:lastpartial, @new_query) 
         
     SearchQuery.create(body: @new_query, session: session) unless @new_query.blank?

@@ -5,20 +5,24 @@ class Analytic < ApplicationRecord
     return nil if new_query_string.blank?
     levenstein_object = LevensteinService.call(new_query_string, old_query_string)
     if levenstein_object.number_of_substitutions > 0 # It's a new search query                
-      Analytic.counter_update_for(new_query_string, 1)
+      counter_update_for(new_query_string, 1)
       session.user_actions.create(action_type: UserAction::TYPE_SEARCH, description: new_query_string)
     elsif levenstein_object.number_of_insertions > 0 # It's an update of the previous search query        
-      Analytic.counter_update_for(old_query_string, -1)      
-      Analytic.counter_update_for(new_query_string, 1)
-      if !session.last_user_action_is_search?
-        session.user_actions.create(action_type: UserAction::TYPE_SEARCH, description: new_query_string)
-      else
-        session.user_actions.last.update(action_type: UserAction::TYPE_SEARCH, description: new_query_string)
-      end      
+      counter_update_for(old_query_string, -1)      
+      counter_update_for(new_query_string, 1)
+      create_or_update_last_user_action(session, old_query_string, new_query_string)          
     end       
   end  
   
   private
+  
+  def self.create_or_update_last_user_action(session, old_query_string, new_query_string)
+    if !session.last_user_action_is_search? || session.user_actions.last.description != old_query_string
+      session.user_actions.create(action_type: UserAction::TYPE_SEARCH, description: new_query_string)
+    else
+      session.user_actions.last.update(action_type: UserAction::TYPE_SEARCH, description: new_query_string)
+    end  
+  end
   
   # Increase or decrease counter for the given 'string' by 'number' value.
   # If counter becomes <=0, destroys record. If string is new, creates new record.
