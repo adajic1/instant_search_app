@@ -7,10 +7,26 @@ $(document).ready(function() {
 	// Initialization
 	if ($("#searchbox").length > 0) {
 		var my_interval='';
+		var my_timeout='';
 		var old_value=0;
 		if (instant_search_on) startInstantSearch();
 		else stopInstantSearch();
 	}  
+    
+    function registerAction(action_type, description) {
+    	$.ajax({
+	        method: "POST",
+	        url: "user_action/create",
+	        data: { action_type: action_type, description: description, authenticity_token: $('[name="csrf-token"]')[0].content},
+	        async: true,
+	        success: function(result) { // Expecting to get "OK"
+				if (result!="OK") alert(result);
+	        },
+	        error: function(result) {
+				alert(JSON.stringify(result));
+	        }
+		});
+    }
     
     function getShortenedContent(content) {
     	var num_chars = 100;
@@ -23,8 +39,10 @@ $(document).ready(function() {
 	function submitIfNeeded() {
 	    new_value = $('#searchbox').val();
 	    if (old_value===0 || new_value!=old_value) {
+	    	clearTimeout(my_timeout);
 			old_value=new_value;
 			// Here goes ajax POST request with :body parameter
+			// It will register user action appropriately
 			$.ajax({
 		        method: "POST",
 		        url: "instant_search/create",
@@ -112,6 +130,19 @@ $(document).ready(function() {
 		$('#article').html("");
 		articleTemplateInsert("#article", "preview_"+id, description, content);
 		$(window).scrollTop(0);
+		registerAction(type_click, "ID: "+id+"; "+description);
+		clearTimeout(my_timeout);
+		my_timeout = setTimeout(function() {
+			registerAction(type_read, "ID: "+id+"; "+description);
+		}, 10000);
+	});
+	
+	$('#button_contact_support_phone').click(function (e) {
+		registerAction(type_support, "by phone");
+	});
+	
+	$('#button_contact_support_email').click(function (e) {
+		registerAction(type_support, "by email");
 	});
 	
 });

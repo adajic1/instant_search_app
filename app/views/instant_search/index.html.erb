@@ -1,7 +1,18 @@
 <%= render partial: "article_template" %>
-<br>
 <center>
-	<a href="articles/index" target="_blank"><input type="button" value="Create, preview or delete articles" class="button_green"></a><br>
+	<table cellspacing="0" cellpadding="0" border="0" width="100%">
+		<tr>
+			<td width="35%" align="left">
+				<input type="button" value="Contact support by phone" class="button_red" id="button_contact_support_phone">
+			</td>
+			<td width="30%" align="center">
+				<a href="articles/index" target="_blank"><input type="button" value="Create, preview or delete articles" class="button_green"></a>
+			</td>
+			<td align="right">				
+				<input type="button" value="Contact support by email" class="button_red" id="button_contact_support_email">
+			</td>
+		</tr>
+	</table>
 	<span style="visibility:hidden;" id="note">
 		<font size=2><i>
 			Note: You can still submit a new query by pressing ENTER
@@ -37,3 +48,10 @@
 		</tr>
 	</table>	
 </center>
+<script type="text/javascript">
+	type_search = "<%= UserAction::TYPE_SEARCH %>"
+	type_click = "<%= UserAction::TYPE_CLICK %>"
+	type_read = "<%= UserAction::TYPE_READ %>"
+	type_close_tab = "<%= UserAction::TYPE_CLOSE_TAB %>"
+	type_support = "<%= UserAction::TYPE_SUPPORT %>"
+</script>

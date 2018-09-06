@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   post 'articles/create', to: 'articles#create'
   delete 'articles/destroy', to: 'articles#destroy'
   delete 'articles/destroy_article', to: 'articles#destroy_article'  
+  post 'user_action/create', to: 'user_action#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
