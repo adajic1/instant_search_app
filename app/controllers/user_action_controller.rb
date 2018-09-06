@@ -1,0 +1,2 @@
+class UserActionController < ApplicationController
+end
