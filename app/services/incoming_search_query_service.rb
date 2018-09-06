@@ -7,12 +7,13 @@ class IncomingSearchQueryService
   
   # Handles incoming search query: saves it, updates Analytic and Session accordingly.
   def call
-    session = Session.get_or_create(@request_ip)        
-    @old_query = session.lastpartial    
+    session = Session.get_or_create(@request_ip) 
+    # Consider this as a new query if last user action is not a search
+    @old_query = (session.last_user_action_is_search?)? session.lastpartial : ""
     session.update_attribute(:lastpartial, @new_query) 
         
     SearchQuery.create(body: @new_query, session: session) unless @new_query.blank?
-    Analytic.compare_and_update(@new_query, @old_query)
+    Analytic.compare_and_update(@new_query, @old_query, session)
   end
 
   private

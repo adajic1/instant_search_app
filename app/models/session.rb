@@ -1,5 +1,6 @@
 class Session < ApplicationRecord
   has_many :search_queries, dependent: :destroy
+  has_many :user_actions, dependent: :destroy
   
   # Get Session instance with given :body -> ip_string. If it doesn't exist, it will be created.
   # * *Returns* :
@@ -8,4 +9,10 @@ class Session < ApplicationRecord
     session = find_by_body(ip_string)
     session.nil? ? Session.create(body: ip_string, lastpartial: '') : session
   end  
+  
+  def last_user_action_is_search?
+    return false if session.user_actions.last==nil || session.user_actions.last.type!=UserAction::TYPE_SEARCH
+    return true    
+  end
+  
 end
