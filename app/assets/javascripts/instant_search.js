@@ -17,7 +17,7 @@ $(document).ready(function() {
     	if (content.length<=num_chars) 
     		return content;
     	else 
-    		return content.substring(0,50)+"...";
+    		return content.substring(0,num_chars)+"...";
     }
     
 	function submitIfNeeded() {
