@@ -74,3 +74,7 @@
 [id^="article_span_instant_search_"] {
   cursor: pointer;
 }
+
+[id^="article_span_instant_search_preview_"] {
+  cursor: default;
+}
