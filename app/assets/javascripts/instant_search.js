@@ -41,10 +41,6 @@ $(document).ready(function() {
 										  response_object.articles[0].id, 
 									 	  response_object.articles[0].description, 
 									      response_object.articles[0].content);
-					$(".article_delete").each(function () {
-						$(this).prev().attr('colspan',2);
-					    $(this).remove();
-					});
 		        },
 		        error: function(result) {
 					if (result.length==0) result="-empty-";
