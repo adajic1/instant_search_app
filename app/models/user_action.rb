@@ -6,5 +6,6 @@ class UserAction < ApplicationRecord
   TYPE_READ = "read article"
   TYPE_CLOSE_ARTICLE = "closed article"  
   TYPE_CLOSE_TAB = "closed tab"
-  TYPE_SEARCH = "contacted support" 
+  TYPE_SUPPORT = "contacted support" 
+  
 end

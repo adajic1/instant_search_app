@@ -6,11 +6,15 @@ class Analytic < ApplicationRecord
     levenstein_object = LevensteinService.call(new_query_string, old_query_string)
     if levenstein_object.number_of_substitutions > 0 # It's a new search query                
       Analytic.counter_update_for(new_query_string, 1)
-      session.user_actions.create(type: UserAction::TYPE_SEARCH, description: new_query_string)
+      session.user_actions.create(action_type: UserAction::TYPE_SEARCH, description: new_query_string)
     elsif levenstein_object.number_of_insertions > 0 # It's an update of the previous search query        
       Analytic.counter_update_for(old_query_string, -1)      
       Analytic.counter_update_for(new_query_string, 1)
-      session.user_actions.last.update(type: UserAction::TYPE_SEARCH, description: new_query_string)
+      if session.user_actions.last==nil || session.user_actions.last.action_type != UserAction::TYPE_SEARCH
+        session.user_actions.create(action_type: UserAction::TYPE_SEARCH, description: new_query_string)
+      else
+        session.user_actions.last.update(action_type: UserAction::TYPE_SEARCH, description: new_query_string)
+      end      
     end       
   end  
   
