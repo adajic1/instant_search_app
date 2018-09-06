@@ -111,6 +111,7 @@ $(document).ready(function() {
 		var content = $('#article_full_content_'+id).html();
 		$('#article').html("");
 		articleTemplateInsert("#article", "preview_"+id, description, content);
+		$(window).scrollTop(0);
 	});
 	
 });
