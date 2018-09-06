@@ -23,9 +23,28 @@ $(document).ready(function() {
 		        data: { body: new_value, authenticity_token: $('[name="csrf-token"]')[0].content},
 		        async: true,
 		        success: function(result) {
-					if (result.length==0) result="-empty-";
-					$('#result').html("<b>Response:</b> "+result);
+					response_object = JSON.parse(result);				
+					response_query = response_object.query;	
+					if (response_query.length==0) response_query="-empty-";			
+					$('#result').html("<b>Response:</b> "+response_query);
 					$('#result').css("visibility","visible");
+					// Now show articles
+					$('#articles_list').html("");
+					$('#article').html("");
+					for (i = 0; i < response_object.articles.length; i++) {
+						articleTemplateInsert("#articles_list", 
+											  response_object.articles[i].id, 
+											  response_object.articles[i].description, 
+											  response_object.articles[i].content);
+					}
+					articleTemplateInsert("#article", 
+										  response_object.articles[0].id, 
+									 	  response_object.articles[0].description, 
+									      response_object.articles[0].content);
+					$(".article_delete").each(function () {
+						$(this).prev().attr('colspan',2);
+					    $(this).remove();
+					});
 		        },
 		        error: function(result) {
 					if (result.length==0) result="-empty-";

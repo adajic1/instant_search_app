@@ -1,3 +1,4 @@
+<%= render partial: "articles/article_template" %>
 <br>
 <center>
 	<a href="articles/index" target="_blank">
@@ -21,4 +22,22 @@
 	<a href="analytics/index" target="_blank">
 		<input type="button" value="View analytics" class="button_green">
 	</a>
+	<br><br>
+	<table cellspacing="0" cellpadding="0" border=0 width="90%">
+		<tr>
+			<td valign="top" align="center" style="padding-left: 10px; padding-right: 10px;">
+				Clicked article preview
+				<span id="article">
+			
+				</span>
+			</td>
+			<td width="45%" align="center">
+				Search results
+				<span id="articles_list">
+			
+				</span>
+			</td>
+			
+		</tr>
+	</table>	
 </center>

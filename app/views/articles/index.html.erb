@@ -19,16 +19,22 @@
 
 <%= render partial: "article_template" %>
 
-<span id="articles_list">
-	<script type="text/javascript">
-	// All of these will be inserted on $(document).ready
-	var array_of_article_ids = [];
-	var array_of_article_descriptions = [];
-	var array_of_article_contents = [];
-	<% @articles.each do |article| %>
-		array_of_article_ids.push('<%= article.id %>');
-		array_of_article_descriptions.push('<%== escape_javascript article.description %>');
-		array_of_article_contents.push('<%== escape_javascript article.content %>');
-	<% end %>
-	</script>
-</span>
+<table cellspacing="0" cellpadding="0" border="0" width="80%">
+	<tr>
+		<td>
+			<span id="articles_list">
+				<script type="text/javascript">
+				// All of these will be inserted on $(document).ready
+				var array_of_article_ids = [];
+				var array_of_article_descriptions = [];
+				var array_of_article_contents = [];
+				<% @articles.each do |article| %>
+					array_of_article_ids.push('<%= article.id %>');
+					array_of_article_descriptions.push('<%== escape_javascript article.description %>');
+					array_of_article_contents.push('<%== escape_javascript article.content %>');
+				<% end %>
+				</script>
+			</span>
+		</td>
+	</tr>
+</table>

@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree ../../../lib/assets/javascripts/.
+//= require_tree ./global/.
 //= require_tree .
