@@ -31,17 +31,18 @@ $(document).ready(function() {
 		        data: { body: new_value, authenticity_token: $('[name="csrf-token"]')[0].content},
 		        async: true,
 		        success: function(result) {
-					var response_object = JSON.parse(result);				
-					var response_query = response_object.query;	
-					if (response_query.length==0) response_query="-empty-";			
+					var response_object = JSON.parse(result);
+									
+					var response_query = response_object.query;					
+					if (response_query.length==0) response_query="-empty-";					
 					$('#result').html("<b>Response:</b> "+response_query);
 					$('#result').css("visibility","visible");
-					$('#articles_list').html("");
-					$('#article').html("");
+						
+					$('#article').html("<img src='images/Preview.png'>");
+					$('#articles_list').html("");				
 					for (i = 0; i < response_object.articles.length; i++) {
 						var id = response_object.articles[i].id;
-						var description = response_object.articles[i].description;
-						
+						var description = response_object.articles[i].description;						
 						var shortened_content = getShortenedContent(response_object.articles[i].content);
 						var full_content = response_object.articles[i].content;
 						articleTemplateInsert("#articles_list", id, description, shortened_content);
