@@ -92,7 +92,7 @@ $(document).ready(function() {
 	$(document).on('page:load', $('#searchbox').val(''));
 	
 	$(document).on('click', '[id^="instant_search_article_span_"]', function() {
-		// id attribute is expected to be of the following format: article_span_<id>
+		// id attribute is expected to be of the following format: instant_search_article_span_<id>
     	var words = $(this).attr("id").split("_");
 		var id = words[words.length - 1];
 		var description = $('#article_description_'+id).html();
