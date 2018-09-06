@@ -12,28 +12,6 @@ class Analytic < ApplicationRecord
     end       
   end  
   
-  # Constant
-  RATIO_UPPER_LIMIT = 0.5 # Ratio limit of levenstein distance compared to longer string's length, for clustering
-  
-  # Get ordered hashes of arrays of similar search queries
-  def self.get_ordered_arrays_of_similar_queries
-    array_of_analytics = Analytic.all.to_a
-    hashes_of_similar_queries = {}
-    temp_hashes_of_similar_queries = {}
-    for i in 0..array_of_analytics.length-1
-      for j in 0..array_of_analytics.length-1
-        next if i==j
-        string1 = array_of_analytics[i].search_query
-        string2 = array_of_analytics[j].search_query
-        longer_length = [string1.length, string2.length].max.to_f
-        levenstein_distance = string1.levenstein(string2).to_f
-        ratio = levenstein_distance / longer_length
-        puts ratio.to_s
-      end
-    end
-    
-  end
-  
   private
   
   # Increase or decrease counter for the given 'string' by 'number' value.
