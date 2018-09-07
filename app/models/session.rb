@@ -38,7 +38,6 @@ class Session < ApplicationRecord
       # Let's got through all user actions of this session
       for j in 0..user_actions.length-1
         user_action = user_actions[j]
-        puts user_action.inspect
         num_of_search_queries_of_session += 1 if user_action.action_type == UserAction::TYPE_SEARCH
         contacted_support = true if user_action.action_type == UserAction::TYPE_SUPPORT
       end
