@@ -1,7 +1,7 @@
 class UserActionController < ApplicationController
   
   def index
-    @sessions = Session.order(id: :DESC)
+    @sessions_info = Session.get_sessions_info()
   end
   
   before_action :validate_params, only: [:create]

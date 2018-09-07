@@ -1,5 +1,6 @@
 <center>
-	<h1>Path info for user actions</h1>
+	<h1>Info for user actions</h1>
+<% @sessions = @sessions_info["sessions"] %>
 <% @sessions.each do |session| %>
 <table id="session_table_<%= session.id %>" cellspacing="5" cellpadding="2" border="5" width="80%" frame="box" rules="none">
 <tr>
@@ -30,4 +31,32 @@
 </tr>
 </table>
 <% end %>
+<br>
+<table cellspacing="8" cellpadding="0" cellspacing="5" cellpadding="2" border="5" frame="box" rules="none">
+	<tr>
+		<td>Total number of sessions: </td>
+		<td><%= @sessions_info["total_sessions"] %></td>
+	</tr>
+	<tr>
+		<td>Total number of user actions: </td>
+		<td><%= @sessions_info["total_user_actions"] %></td>
+	</tr>
+	<tr>
+		<td>Sessions with single search query: </td>
+		<td><%= @sessions_info["sessions_with_single_search"] %></td>
+	</tr>
+	<tr>
+		<td>Sessions with multiple search queries: </td>
+		<td><%= @sessions_info["sessions_with_multiple_search"] %></td>
+	</tr> 
+	<tr>
+		<td>Sessions which contacted support: </td>
+		<td><%= @sessions_info["sessions_contacted_support"] %></td>
+	</tr>
+	<tr>
+		<td>Sessions which closed tab: </td>
+		<td><%= @sessions_info["sessions_closed_tab"] %></td>
+	</tr> 
+</table>
+
 </center>
