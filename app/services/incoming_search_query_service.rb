@@ -5,7 +5,7 @@ class IncomingSearchQueryService
     new(search_query, request_ip).call
   end
   
-  # Handles incoming search query: saves it, updates Analytic and Session accordingly.
+  # Handles incoming search query: saves it, updates Analytic and Session accordingly, registers UserAction
   def call
     session = Session.get_or_create(@request_ip) 
     @old_query = session.lastpartial
