@@ -130,10 +130,10 @@ $(document).ready(function() {
 		$('#article').html("");
 		articleTemplateInsert("#article", "preview_"+id, description, content);
 		$(window).scrollTop(0);
-		registerAction(type_click, "ID: "+id+"; "+description);
+		registerAction(type_click, "ID: "+id+", "+description);
 		clearTimeout(my_timeout);
 		my_timeout = setTimeout(function() {
-			registerAction(type_read, "ID: "+id+"; "+description);
+			registerAction(type_read, "ID: "+id+", "+description);
 		}, 10000);
 	});
 	

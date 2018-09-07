@@ -1,0 +1,33 @@
+<center>
+	<h1>Path info for user actions</h1>
+<% @sessions.each do |session| %>
+<table id="session_table_<%= session.id %>" cellspacing="5" cellpadding="2" border="5" width="80%" frame="box" rules="none">
+<tr>
+	<td width="1px" style="white-space: nowrap;">Session IP: <font color="purple"><%= session.body %></font></td>
+	<td width="1px" style="white-space: nowrap;">Session id: <font color="purple"><%= session.id %></font></td>
+	<td width="1px" style="white-space: nowrap;">Created at: <font color="purple"><%= session.created_at %></font></td>
+	<td width="1px" style="white-space: nowrap;">Updated at: <font color="purple"><%= session.updated_at %></font></td>
+	<td>&nbsp;</td>
+</tr>
+<tr>
+	<td colspan="5">
+		Path info: 
+		<% session.user_actions.order(id: :ASC).each_with_index do |user_action, index| %>
+			<font color="blue"><%= user_action.action_type %></font>
+			<font color="black"><%= user_action.description %></font>
+			<% if index!=session.user_actions.size-1 %>
+				<font color="red"><b>--></b></font>
+			<% end %>
+		<% end %>	
+	</td>
+</tr>
+<tr>
+	<td colspan="5" align="right">
+		<span id="delete_session_<%= session.id %>" style="cursor: pointer;"><font color="blue">
+			DELETE SESSION
+		</font></span>
+	</td>
+</tr>
+</table>
+<% end %>
+</center>

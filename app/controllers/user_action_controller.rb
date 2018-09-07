@@ -1,5 +1,9 @@
 class UserActionController < ApplicationController
   
+  def index
+    @sessions = Session.order(id: :DESC)
+  end
+  
   before_action :validate_params, only: [:create]
   def create
     if (!@params_valid) 
@@ -8,6 +12,12 @@ class UserActionController < ApplicationController
       Session.get_or_create(request.remote_ip).user_actions.create(action_params)   
       send_data "OK"
     end
+  end
+  
+  # Destroys particular session
+  def destroy_session
+    Session.destroy(params[:id])
+    send_data params[:id] 
   end
   
   private

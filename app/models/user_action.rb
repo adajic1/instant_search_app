@@ -2,7 +2,7 @@ class UserAction < ApplicationRecord
   belongs_to :session
   
   # Constant strings defining actions
-  TYPE_SEARCH = "searched article"
+  TYPE_SEARCH = "searched for"
   TYPE_CLICK = "clicked article"
   TYPE_READ = "read article"
   TYPE_CLOSE_TAB = "closed tab"
