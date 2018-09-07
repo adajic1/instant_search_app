@@ -6,3 +6,7 @@ function articleTemplateInsert(insert_where, article_id, article_description, ar
 	$("#article_id_"+article_id).html(article_id);
 	$("#article_content_"+article_id).html(article_content);
 }
+
+String.prototype.isEmpty = function () {
+	return (this.length===0 || !this.trim());
+};

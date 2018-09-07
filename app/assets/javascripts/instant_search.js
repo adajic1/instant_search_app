@@ -13,12 +13,20 @@ $(document).ready(function() {
 		else stopInstantSearch();
 	}  
     
-    function registerAction(action_type, description) {
+    var unloadHandler = function () {
+		registerAction(type_close_tab, "END", false);
+	};
+    
+    $(function () {
+		window.addEventListener("beforeunload", unloadHandler);
+	});
+    
+    function registerAction(action_type, description, async) {
     	$.ajax({
 	        method: "POST",
 	        url: "user_action/create",
 	        data: { action_type: action_type, description: description, authenticity_token: $('[name="csrf-token"]')[0].content},
-	        async: true,
+	        async: async,
 	        success: function(result) { // Expecting to get "OK"
 				if (result!="OK") alert(result);
 	        },
@@ -38,7 +46,7 @@ $(document).ready(function() {
     
 	function submitIfNeeded() {
 	    new_value = $('#searchbox').val();
-	    if (old_value===0 || new_value!=old_value) {
+	    if ((old_value===0 || new_value!=old_value) && !new_value.isEmpty()) {
 	    	clearTimeout(my_timeout);
 			old_value=new_value;
 			// Here goes ajax POST request with :body parameter
@@ -130,19 +138,19 @@ $(document).ready(function() {
 		$('#article').html("");
 		articleTemplateInsert("#article", "preview_"+id, description, content);
 		$(window).scrollTop(0);
-		registerAction(type_click, "ID: "+id+", "+description);
+		registerAction(type_click, "ID: "+id+", "+description, true);
 		clearTimeout(my_timeout);
 		my_timeout = setTimeout(function() {
-			registerAction(type_read, "ID: "+id+", "+description);
+			registerAction(type_read, "ID: "+id+", "+description, true);
 		}, 10000);
 	});
 	
 	$('#button_contact_support_phone').click(function (e) {
-		registerAction(type_support, "by phone");
+		registerAction(type_support, "by phone", true);
 	});
 	
 	$('#button_contact_support_email').click(function (e) {
-		registerAction(type_support, "by email");
+		registerAction(type_support, "by email", true);
 	});
 	
 });
