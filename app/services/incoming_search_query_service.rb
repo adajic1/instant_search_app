@@ -12,7 +12,7 @@ class IncomingSearchQueryService
     session.update_attribute(:lastpartial, @new_query) 
         
     SearchQuery.create(body: @new_query, session: session) unless @new_query.blank?
-    Analytic.handle_counter(session, @old_query, @new_query)
+    Analytic.handle_counters_based_on_query_type(session, @old_query, @new_query)
     UserAction.register_type_search(session, @old_query, @new_query)
   end
 

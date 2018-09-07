@@ -1,7 +1,7 @@
 class Analytic < ApplicationRecord
    
   # Handle analytics of new and old query
-  def self.handle_counter(session, old_query_string, new_query_string) 
+  def self.handle_counters_based_on_query_type(session, old_query_string, new_query_string) 
     return nil if new_query_string.blank?
     query_type = SearchQuery.get_type_of_search_query(session, old_query_string, new_query_string)
     if query_type == SearchQuery::QUERY_TYPE_NEW
