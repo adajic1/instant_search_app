@@ -9,7 +9,9 @@ class Analytic < ApplicationRecord
     elsif query_type == SearchQuery::QUERY_TYPE_UPDATE
       increase_or_decrease_counter_for(old_query_string, -1)
       increase_or_decrease_counter_for(new_query_string, 1) 
-    end    
+    end  
+    # Do nothing for QUERY_TYPE_TEMPORARY,
+    # for example user is deleting characters - so analytics won't be changed until he starts to type again 
   end  
   
   private
