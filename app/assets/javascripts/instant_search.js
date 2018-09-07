@@ -145,10 +145,12 @@ $(document).ready(function() {
 	
 	$('#button_contact_support_phone').click(function (e) {
 		registerAction(type_support, "by phone", true);
+		alert("Let's say you contacted support");
 	});
 	
 	$('#button_contact_support_email').click(function (e) {
 		registerAction(type_support, "by email", true);
+		alert("Let's say you contacted support");
 	});
 	
 });
