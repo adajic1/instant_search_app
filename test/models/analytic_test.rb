@@ -13,13 +13,11 @@ class AnalyticTest < ActiveSupport::TestCase
   def test_handle_counter
     @old_query = ""
     @new_query = "test" 
-    $stdout.puts "HHHHHHHHH"
-    Analytic.handle_counter(@session, @old_query, @new_query)
     
-    #db_record = Analytic.find_by_search_query(@new_query)
-    #puts db_record.inspect
-
-    # assert_equal(4, @num.add(2) )
+    # Test if counter increased by 1
+    Analytic.handle_counter(@session, @old_query, @new_query)    
+    db_record = Analytic.find_by_search_query(@new_query)
+    assert_equal(3, db_record.counter)      
   end
 
 end

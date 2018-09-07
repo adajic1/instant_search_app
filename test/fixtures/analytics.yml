@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  phrase: MyString
-  counter: 1
+  search_query: test
+  counter: 2
 
 two:
-  phrase: MyString
+  search_query: How to
   counter: 1
