@@ -2,7 +2,7 @@
 	<h1>Info for user actions</h1>
 <% @sessions = @sessions_info["sessions"] %>
 <% @sessions.each do |session| %>
-<table id="session_table_<%= session.id %>" cellspacing="5" cellpadding="2" border="5" width="80%">
+<table id="session_table_<%= session.id %>" cellspacing="5" cellpadding="2" border="3" width="80%">
 <tr>
 	<td width="1px" style="white-space: nowrap;">Session IP: <font color="purple"><%= session.body %></font></td>
 	<td width="1px" style="white-space: nowrap;">Session id: <font color="purple"><%= session.id %></font></td>
@@ -32,7 +32,7 @@
 </table>
 <% end %>
 <br>
-<table cellspacing="8" cellpadding="5" cellspacing="5" cellpadding="2" border="5" frame="box">
+<table cellspacing="8" cellpadding="5" cellspacing="5" cellpadding="2" border="3">
 	<tr>
 		<td>Total number of sessions: </td>
 		<td><%= @sessions_info["total_sessions"] %></td>
