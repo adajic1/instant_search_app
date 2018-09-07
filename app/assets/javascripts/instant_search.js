@@ -10,16 +10,14 @@ $(document).ready(function() {
 		var my_timeout='';
 		var old_value=0;
 		if (instant_search_on) startInstantSearch();
-		else stopInstantSearch();
+		else stopInstantSearch();		
+		var unloadHandler = function () {
+			registerAction(type_close_tab, "END", false);
+		};	    
+	    $(function () {
+			window.addEventListener("beforeunload", unloadHandler);
+		});
 	}  
-    
-    var unloadHandler = function () {
-		registerAction(type_close_tab, "END", false);
-	};
-    
-    $(function () {
-		window.addEventListener("beforeunload", unloadHandler);
-	});
     
     function registerAction(action_type, description, async) {
     	$.ajax({
