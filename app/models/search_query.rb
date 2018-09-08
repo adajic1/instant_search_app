@@ -8,6 +8,7 @@ class SearchQuery < ApplicationRecord
   
   # Returns one of the QUERY_TYPE constants given above
   def self.get_type_of_search_query(session, old_query_string, new_query_string)
+    
     levenstein_object = LevensteinService.call(new_query_string, old_query_string)
     if levenstein_object.number_of_substitutions > 0 
       return QUERY_TYPE_NEW
@@ -17,6 +18,7 @@ class SearchQuery < ApplicationRecord
       return QUERY_TYPE_UPDATE
     end     
     return QUERY_TYPE_TEMPORARY
+    
   end
 
 end
