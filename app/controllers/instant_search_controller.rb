@@ -7,12 +7,12 @@ class InstantSearchController < ApplicationController
   
   # New search query
   def create
-    query_string = params[:body] 
-    IncomingSearchQueryService.call(query_string, request.remote_ip)   
-    @articles = Article.get_relevant_articles(query_string) 
+    IncomingSearchQueryService.call(params[:body], request.remote_ip) 
+      
     return_data = {}
-    return_data["articles"] = @articles
-    return_data["query"] = query_string
+    return_data["articles"] = Article.get_relevant_articles(params[:body]) 
+    return_data["query"] = params[:body]
+
     send_data return_data.to_json
   end
   
