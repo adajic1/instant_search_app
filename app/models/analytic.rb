@@ -22,13 +22,17 @@ class Analytic < ApplicationRecord
   # If counter becomes <=0, destroys record. If string is new, creates new record.
   def self.increase_or_decrease_counter(string, number) 
     return 0 if string.blank?
+    
     analytic_row = find_by_search_query(string)            
-    if !analytic_row.nil? # string already exists in the database 
+    if !analytic_row.nil? 
+      # string already exists in the database 
       analytic_row.destroy if analytic_row.counter + number <= 0
       analytic_row.update_attribute(:counter, analytic_row.counter + number) if analytic_row.counter + number > 0
-    elsif number > 0 # string is new, so the record should be created now            
+    elsif number > 0 
+      # string is new, so the record should be created now            
       create(counter: number, search_query: string)
-    end    
+    end
+           
   end    
   
 end
